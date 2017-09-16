@@ -21,6 +21,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var userLatitude: CLLocationDegrees = 0
     var userLongitude: CLLocationDegrees = 0
+    var airplaneArray: [Flight] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,7 +120,6 @@ extension ViewController: CLLocationManagerDelegate {
         guard let altitude = locations.last?.altitude else { return }
         userLatitude = userLocation.coordinate.latitude
         userLongitude = userLocation.coordinate.longitude
-        
     }
     
     // Called if location manager fails to update
@@ -127,7 +127,6 @@ extension ViewController: CLLocationManagerDelegate {
     {
         print("\(error)")
     }
-    
 }
 
 // MARK: - WebSocketDelegate
@@ -141,10 +140,34 @@ extension ViewController: WebSocketDelegate {
     }
     
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-        print("\(text)")
+        let json = text.toJSON()
+        print(json)
+        if let flights = json as? [String: Any] {
+            for i in flights {
+                let call = flights["call"] as! String
+                let lat = flights["lat"] as! Double
+                let lng = flights["lng"] as! Double
+                let alt = flights["alt"] as! Double
+                let hdg = flights["hdg"]
+                let gvel = flights["gvel"]
+                let vvel = flights["vvel"]
+                
+                let airplane: Flight = Flight(callsign: call, longitude: lng, latitude: lat, altitude: alt)!
+                print(airplane)
+                
+                airplaneArray.append(airplane)
+            }
+        }
     }
     
     func websocketDidReceiveData(socket: WebSocket, data: Data) {
         print("data")
+    }
+}
+
+extension String {
+    func toJSON() -> Any? {
+        guard let data = self.data(using: .utf8, allowLossyConversion: false) else { return nil }
+        return try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
     }
 }
