@@ -51,7 +51,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillAppear(animated)
         
         // Create a session configuration
-        let configuration = ARWorldTrackingSessionConfiguration()
+        let configuration = ARWorldTrackingConfiguration()
         configuration.worldAlignment = .gravityAndHeading
         
         // Run the view's session
@@ -171,7 +171,6 @@ extension ViewController: WebSocketDelegate {
     
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
         let json = text.toJSON()
-        print(json)
         if let flights = json as? [String: Any] {
             for i in flights {
                 let call = flights["call"] as! String
@@ -183,7 +182,6 @@ extension ViewController: WebSocketDelegate {
                 let vvel = flights["vvel"]
                 
                 let airplane: Flight = Flight(callsign: call, longitude: lng, latitude: lat, altitude: alt)!
-                print(airplane)
                 
                 airplaneArray.append(airplane)
             }
