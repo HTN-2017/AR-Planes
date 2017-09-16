@@ -21,45 +21,54 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
     fileprivate let locationManager = CLLocationManager()
     
-    var userLatitude: CLLocationDegrees = 0
-    var userLongitude: CLLocationDegrees = 0
-    var airplaneArray: [Flight] = []
+    var mostRecentUserLocation: CLLocation? {
+        didSet {
+            sendLocation()
+        }
+    }
+    
+    var nearbyFlights: [Flight] = [] {
+        didSet {
+            guard let userLocation = mostRecentUserLocation else {
+                return
+            }
+            
+            let newNodes = nearbyFlights.map { flight -> SCNNode in
+                let planeNode = nodeForPlane(color: .red)
+                planeNode.position = Flight.mock.sceneKitCoordinate(relativeTo: userLocation)
+                return planeNode
+            }
+            
+            sceneView.scene.rootNode.childNodes.forEach { $0.removeFromParentNode() }
+            newNodes.forEach { sceneView.scene.rootNode.addChildNode($0) }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Set the view's delegate
         sceneView.delegate = self
         
-        // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
-        
-        // Create a new scene
         let scene = SCNScene()
-        
-        // Set the scene to the view
         sceneView.scene = scene
-      
+        sceneView.antialiasingMode = .multisampling2X
+        
         // Connect to web socket
         socket.delegate = self
         socket.connect()
-      
-        sceneView.antialiasingMode = .multisampling2X
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Create a session configuration
+
         let configuration = ARWorldTrackingConfiguration()
         configuration.worldAlignment = .gravityAndHeading
-        
-        // Run the view's session
         sceneView.session.run(configuration)
         
         setUpLocationManager()
         
-        let greenPlane = nodeForPlane(color: .green)
+        /*let greenPlane = nodeForPlane(color: .green)
         greenPlane.position = SCNVector3.init(500, 500, 500)
         sceneView.scene.rootNode.addChildNode(greenPlane)
         
@@ -70,7 +79,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let planeNode = nodeForPlane(color: .red)
         let hardcodedLocation = CLLocation(latitude: 43.4729, longitude: -80.5402)
         planeNode.position = Flight.mock.sceneKitCoordinate(relativeTo: hardcodedLocation)
-        sceneView.scene.rootNode.addChildNode(planeNode)
+        sceneView.scene.rootNode.addChildNode(planeNode)*/
     }
     
     func nodeForPlane(color: UIColor = .white) -> SCNNode {
@@ -144,12 +153,7 @@ extension ViewController: CLLocationManagerDelegate {
     
     // Called every time location changes
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let userLocation:CLLocation = locations[0] as CLLocation
-        
-        // Print coordinates
-        guard let altitude = locations.last?.altitude else { return }
-        userLatitude = userLocation.coordinate.latitude
-        userLongitude = userLocation.coordinate.longitude
+        mostRecentUserLocation = locations[0] as CLLocation
     }
     
     // Called if location manager fails to update
@@ -160,9 +164,19 @@ extension ViewController: CLLocationManagerDelegate {
 }
 
 // MARK: - WebSocketDelegate
+
 extension ViewController: WebSocketDelegate {
+    
     func websocketDidConnect(socket: WebSocket) {
-        socket.write(string: "\(userLatitude),\(userLongitude)")
+        sendLocation()
+    }
+    
+    func sendLocation() {
+        guard let location = mostRecentUserLocation else {
+            return
+        }
+        
+        socket.write(string: "\(location.coordinate.latitude),\(location.coordinate.longitude)")
     }
     
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
@@ -170,21 +184,29 @@ extension ViewController: WebSocketDelegate {
     }
     
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-        let json = text.toJSON()
-        if let flights = json as? [String: Any] {
-            for i in flights {
-                let call = flights["call"] as! String
-                let lat = flights["lat"] as! Double
-                let lng = flights["lng"] as! Double
-                let alt = flights["alt"] as! Double
-                let hdg = flights["hdg"]
-                let gvel = flights["gvel"]
-                let vvel = flights["vvel"]
-                
-                let airplane: Flight = Flight(callsign: call, longitude: lng, latitude: lat, altitude: alt)!
-                
-                airplaneArray.append(airplane)
-            }
+        guard let flightData = text.toJSON() as? [[String: Any]] else {
+            return
+        }
+        
+        nearbyFlights = flightData.map { flight in
+            let icao = flight["icao"] as? String ?? "--"
+            let call = flight["call"] as? String ?? "Unknown"
+            let lat = flight["lat"] as? Double ?? 0
+            let lng = flight["lng"] as? Double ?? 0
+            let alt = flight["alt"] as? Double ?? 0
+            let hdg = flight["hdg"] as? Double ?? 0
+            let _ = flight["gvel"]
+            let _ = flight["vvel"]
+            
+            let airplane = Flight(
+                ICAO: icao,
+                callsign: call,
+                longitude: lat,
+                latitude: lng,
+                altitude: alt,
+                heading: hdg)
+            
+            return airplane
         }
     }
     
