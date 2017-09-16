@@ -67,8 +67,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         let userLocation:CLLocation = locations[0] as CLLocation
         
         // Print coordinates
-        print("user latitude = \(userLocation.coordinate.latitude)")
-        print("user longitude = \(userLocation.coordinate.longitude)")
+        guard let altitude = locations.last?.altitude else { return }
+        let userLatitude = userLocation.coordinate.latitude
+        let userLongitude = userLocation.coordinate.longitude
     }
     
     // Called if location manager fails to update
