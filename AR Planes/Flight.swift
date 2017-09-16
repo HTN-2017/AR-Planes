@@ -13,10 +13,11 @@ import SceneKit
 struct Flight {
     
     //{"call":"DAL137  ","lat":44.4364,"lng":-80.4109,"alt":10888.98,"hdg":216.01,"gvel":253.75,"vvel":-5.2}]
-    static let mock = Flight(callsign: "DAL137", longitude: -80.4109, latitude: 44.4364, altitude: 10888.98, heading: 216.01)
+    static let mock = Flight(ICAO: "--", callsign: "DAL137", longitude: -80.4109, latitude: 44.4364, altitude: 10888.98, heading: 216.01)
     
     // MARK: - Properties
     
+    let ICAO: String
     let callsign: String
     let longitude: Double
     let latitude: Double
@@ -53,25 +54,19 @@ struct Flight {
     
     // MARK: - Initializers
     
-    init(callsign: String,
+    init(ICAO: String,
+         callsign: String,
          longitude: Double,
          latitude: Double,
          altitude: Double,
          heading: Double)
     {
+        self.ICAO = ICAO
         self.callsign = callsign
         self.longitude = longitude
         self.latitude = latitude
         self.altitude = altitude
         self.heading = heading
-    }
-    
-    init?(callsign: String, longitude: Double, latitude: Double, altitude: Double) {
-        self.callsign = callsign.trimmingCharacters(in: .whitespacesAndNewlines)
-        self.longitude = longitude
-        self.latitude = latitude
-        self.altitude = altitude
-        self.heading = 0 //this method is gonna get deleted anyway
     }
 }
 
