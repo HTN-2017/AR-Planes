@@ -16,7 +16,8 @@ import SceneKit.ModelIO
 
 class ViewController: UIViewController, ARSCNViewDelegate {
 
-    var socket = WebSocket(url: URL(string: "ws://34.232.80.41/")!)
+    let socket = WebSocket(url: URL(string: "ws://34.232.80.41/")!)
+    private let serverPollingInterval = TimeInterval(5)
     
     @IBOutlet var sceneView: ARSCNView!
     fileprivate let locationManager = CLLocationManager()
@@ -38,7 +39,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             for flight in nearbyFlights {
                 //update existing node if it exists
                 if let existingNode = planeNodes[flight.icao] {
-                    existingNode.position = flight.sceneKitCoordinate(relativeTo: userLocation)
+                    let move = SCNAction.move(
+                        to: flight.sceneKitCoordinate(relativeTo: userLocation),
+                        duration: serverPollingInterval)
+                    
+                    let rotate = SCNAction.rotate(
+                        toAxisAngle: flight.sceneKitRotation(),
+                        duration: serverPollingInterval)
+                    
+                    existingNode.runAction(.group([move/*, rotate*/]))
                 }
                 
                 //otherwise, make a new node
@@ -47,6 +56,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     planeNodes[flight.icao] = newNode
                     
                     newNode.position = flight.sceneKitCoordinate(relativeTo: userLocation)
+                    newNode.rotation = flight.sceneKitRotation()
                     sceneView.scene.rootNode.addChildNode(newNode)
                 }
             }
@@ -91,6 +101,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.run(configuration)
         
         setUpLocationManager()
+        
+        let mockPlane = newPlaneNode()
+        
+        let planeMaterial = SCNMaterial()
+        planeMaterial.diffuse.contents = UIColor.green
+        mockPlane.geometry?.materials = [planeMaterial]
+        
+        mockPlane.position = SCNVector3.init(0, 200, 0)
+        mockPlane.rotation = Flight.mock.sceneKitRotation()
+        sceneView.scene.rootNode.addChildNode(mockPlane)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
