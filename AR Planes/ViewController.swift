@@ -70,6 +70,27 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return planeNode
     }
     
+    // MARK: - User interaction
+    
+//    func setupTap() {
+//        let tapRecognizer = UITapGestureRecognizer()
+//            tapRecognizer.numberOfTapsRequired = 1
+//            tapRecognizer.numberOfTouchesRequired = 1
+//            tapRecognizer.addTarget(self, action: Selector(("sceneTapped:")))
+//            sceneView.gestureRecognizers = [tapRecognizer]
+//    }
+//
+//    func sceneTapped(recognizer: UITapGestureRecognizer) {
+//        let location = recognizer.location(in: sceneView)
+//
+//        let hitResults = sceneView.hitTest(location, options: nil)
+//        if hitResults.count > 0 {
+//            let result = hitResults[0]
+//            let node = result.node
+//            print(node)
+//        }
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         sceneView.delegate = self
@@ -81,6 +102,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Connect to web socket
         socket.delegate = self
         socket.connect()
+        
+//        setupTap()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,7 +152,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
     }
-
 }
 
 // MARK: - CLLocationManagerDelegate
