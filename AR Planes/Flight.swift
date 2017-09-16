@@ -13,7 +13,7 @@ import SceneKit
 struct Flight {
     
     //{"call":"DAL137  ","lat":44.4364,"lng":-80.4109,"alt":10888.98,"hdg":216.01,"gvel":253.75,"vvel":-5.2}]
-    static let mock = Flight(icao: "--", callsign: "DAL137", longitude: -80.4109, latitude: 44.4364, altitude: 10888.98, heading: 216.01)
+    static let mock = Flight(icao: "--", callsign: "DAL137", longitude: -80.4109, latitude: 44.4364, altitude: 10888.98, heading: 180)
     
     // MARK: - Properties
     
@@ -39,17 +39,21 @@ struct Flight {
     func sceneKitCoordinate(relativeTo userLocation: CLLocation) -> SCNVector3 {
         let distance = location.distance(from: userLocation)
         let heading = userLocation.coordinate.getHeading(toPoint: location.coordinate)
-        let headingRadians = heading * (.pi/180)
+        let headingRadians = heading * (.pi/180) - (.pi/2) //add pi/2 to offset for .obj orientation (presumably)
         
         let distanceScale: Double = 1/140
         let eastWestOffset = distance * sin(headingRadians) * distanceScale
         let northSouthOffset = distance * cos(headingRadians)  * distanceScale
         
-        let altitudeScale: Double = 1/20
+        let altitudeScale: Double = 1/140 //1/20
         let upDownOffset = altitude * altitudeScale
         
         //in .gravityAndHeading, (1, 1, 1) is (east, up, south)
         return SCNVector3(eastWestOffset, upDownOffset, -northSouthOffset)
+    }
+    
+    func sceneKitRotation() -> SCNVector4 {
+        return SCNVector4(0, 1, 0, heading)
     }
     
     // MARK: - Initializers
@@ -68,6 +72,9 @@ struct Flight {
         self.altitude = altitude
         self.heading = heading
     }
+    
+    // MARK: - Scrape additional info from flightaware.com
+    
 }
 
 // MARK: - CLLocationCoordinate2D + Heading
