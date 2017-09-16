@@ -14,6 +14,7 @@
 		2E67409B1F6D018400EEF5CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E67409A1F6D018400EEF5CE /* Assets.xcassets */; };
 		2E67409E1F6D018400EEF5CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E67409C1F6D018400EEF5CE /* LaunchScreen.storyboard */; };
 		2E6740A61F6D728200EEF5CE /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6740A51F6D728200EEF5CE /* Flight.swift */; };
+		2E6740B01F6DA20000EEF5CE /* 777.obj in Resources */ = {isa = PBXBuildFile; fileRef = 2E6740AF1F6DA1FF00EEF5CE /* 777.obj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		2E67409D1F6D018400EEF5CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E67409F1F6D018400EEF5CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E6740A51F6D728200EEF5CE /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
+		2E6740AF1F6DA1FF00EEF5CE /* 777.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 777.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,13 +61,14 @@
 			isa = PBXGroup;
 			children = (
 				2E6740911F6D018400EEF5CE /* AppDelegate.swift */,
+				2E6740AF1F6DA1FF00EEF5CE /* 777.obj */,
 				2E6740931F6D018400EEF5CE /* art.scnassets */,
 				2E6740951F6D018400EEF5CE /* ViewController.swift */,
+				2E6740A51F6D728200EEF5CE /* Flight.swift */,
 				2E6740971F6D018400EEF5CE /* Main.storyboard */,
 				2E67409A1F6D018400EEF5CE /* Assets.xcassets */,
 				2E67409C1F6D018400EEF5CE /* LaunchScreen.storyboard */,
 				2E67409F1F6D018400EEF5CE /* Info.plist */,
-				2E6740A51F6D728200EEF5CE /* Flight.swift */,
 			);
 			path = "AR Planes";
 			sourceTree = "<group>";
@@ -129,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E6740941F6D018400EEF5CE /* art.scnassets in Resources */,
+				2E6740B01F6DA20000EEF5CE /* 777.obj in Resources */,
 				2E67409E1F6D018400EEF5CE /* LaunchScreen.storyboard in Resources */,
 				2E67409B1F6D018400EEF5CE /* Assets.xcassets in Resources */,
 				2E6740991F6D018400EEF5CE /* Main.storyboard in Resources */,
@@ -320,6 +324,7 @@
 				2E6740A41F6D018400EEF5CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
