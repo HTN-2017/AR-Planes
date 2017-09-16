@@ -11,6 +11,8 @@ import SceneKit
 import ARKit
 import CoreLocation
 import Starscream
+import ModelIO
+import SceneKit.ModelIO
 
 class ViewController: UIViewController, ARSCNViewDelegate {
 
@@ -33,26 +35,54 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
         
         // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        let scene = SCNScene()
         
         // Set the scene to the view
         sceneView.scene = scene
-        
+      
         // Connect to web socket
         socket.delegate = self
         socket.connect()
+      
+        sceneView.antialiasingMode = .multisampling2X
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
+        let configuration = ARWorldTrackingSessionConfiguration()
+        configuration.worldAlignment = .gravityAndHeading
         
         // Run the view's session
         sceneView.session.run(configuration)
         
         setUpLocationManager()
+        
+        let greenPlane = nodeForPlane(color: .green)
+        greenPlane.position = SCNVector3.init(500, 500, 500)
+        sceneView.scene.rootNode.addChildNode(greenPlane)
+        
+        let bluePlane = nodeForPlane(color: .green)
+        bluePlane.position = SCNVector3.init(0, 400, 0)
+        sceneView.scene.rootNode.addChildNode(bluePlane)
+        
+        let planeNode = nodeForPlane(color: .red)
+        let hardcodedLocation = CLLocation(latitude: 43.4729, longitude: -80.5402)
+        planeNode.position = Flight.mock.sceneKitCoordinate(relativeTo: hardcodedLocation)
+        sceneView.scene.rootNode.addChildNode(planeNode)
+    }
+    
+    func nodeForPlane(color: UIColor = .white) -> SCNNode {
+        let planeAssetUrl = Bundle.main.url(forResource: "777", withExtension: "obj")!
+        let planeAsset = MDLAsset(url: planeAssetUrl)
+        let planeNode = SCNNode(mdlObject: planeAsset.object(at: 0))
+        
+        let planeMaterial = SCNMaterial()
+        planeMaterial.diffuse.contents = color
+        planeNode.geometry?.materials = [planeMaterial]
+        
+        return planeNode
     }
     
     override func viewWillDisappear(_ animated: Bool) {
