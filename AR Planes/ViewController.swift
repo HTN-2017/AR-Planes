@@ -11,11 +11,10 @@ import SceneKit
 import ARKit
 import CoreLocation
 
-class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet var sceneView: ARSCNView!
-    
-    var locationManager: CLLocationManager!
+    fileprivate let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,45 +36,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         super.viewWillAppear(animated)
         
         // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
+        let configuration = ARWorldTrackingSessionConfiguration()
         
         // Run the view's session
         sceneView.session.run(configuration)
         
-        getUserLocation()
-    }
-    
-    func getUserLocation() {
-        // Initialize
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        
-        // Highest accuracy
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
-        // Request location when app is in use
-        locationManager.requestWhenInUseAuthorization()
-        
-        // Update location if authorized
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.startUpdatingLocation()
-        }
-    }
-    
-    // Called every time location changes
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let userLocation:CLLocation = locations[0] as CLLocation
-        
-        // Print coordinates
-        guard let altitude = locations.last?.altitude else { return }
-        let userLatitude = userLocation.coordinate.latitude
-        let userLongitude = userLocation.coordinate.longitude
-    }
-    
-    // Called if location manager fails to update
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
-    {
-        print("\(error)")
+        setUpLocationManager()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -115,4 +81,43 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
     }
+}
+
+// MARK: - CLLocationManagerDelegate
+
+extension ViewController: CLLocationManagerDelegate {
+    
+    func setUpLocationManager() {
+        // Initialize
+        locationManager.delegate = self
+        
+        // Highest accuracy
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        // Request location when app is in use
+        locationManager.requestWhenInUseAuthorization()
+        
+        // Update location if authorized
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    // Called every time location changes
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation:CLLocation = locations[0] as CLLocation
+        
+        // Print coordinates
+        guard let altitude = locations.last?.altitude else { return }
+        let userLatitude = userLocation.coordinate.latitude
+        let userLongitude = userLocation.coordinate.longitude
+        
+    }
+    
+    // Called if location manager fails to update
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    {
+        print("\(error)")
+    }
+    
 }
