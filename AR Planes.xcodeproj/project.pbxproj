@@ -14,9 +14,11 @@
 		2E67409B1F6D018400EEF5CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E67409A1F6D018400EEF5CE /* Assets.xcassets */; };
 		2E67409E1F6D018400EEF5CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E67409C1F6D018400EEF5CE /* LaunchScreen.storyboard */; };
 		2E6740A61F6D728200EEF5CE /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6740A51F6D728200EEF5CE /* Flight.swift */; };
+		83A5B669A88E72FF5AFC4FA7 /* Pods_AR_Planes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550D4B5B88B41087DEBBEFAE /* Pods_AR_Planes.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		097E279DD0DF170C0612A52F /* Pods-AR Planes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR Planes.release.xcconfig"; path = "Pods/Target Support Files/Pods-AR Planes/Pods-AR Planes.release.xcconfig"; sourceTree = "<group>"; };
 		2E67408E1F6D018400EEF5CE /* AR Planes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AR Planes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E6740911F6D018400EEF5CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E6740931F6D018400EEF5CE /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -26,6 +28,8 @@
 		2E67409D1F6D018400EEF5CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E67409F1F6D018400EEF5CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E6740A51F6D728200EEF5CE /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
+		550D4B5B88B41087DEBBEFAE /* Pods_AR_Planes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AR_Planes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2B8B8721E21515F702D6FC9 /* Pods-AR Planes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR Planes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AR Planes/Pods-AR Planes.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +37,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83A5B669A88E72FF5AFC4FA7 /* Pods_AR_Planes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F827E9A9412A7AA531E581C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B2B8B8721E21515F702D6FC9 /* Pods-AR Planes.debug.xcconfig */,
+				097E279DD0DF170C0612A52F /* Pods-AR Planes.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		2E6740851F6D018400EEF5CE = {
 			isa = PBXGroup;
 			children = (
 				2E6740901F6D018400EEF5CE /* AR Planes */,
 				2E67408F1F6D018400EEF5CE /* Products */,
+				0F827E9A9412A7AA531E581C /* Pods */,
+				5D1D145C5EE95982BCD652DD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,6 +86,14 @@
 			path = "AR Planes";
 			sourceTree = "<group>";
 		};
+		5D1D145C5EE95982BCD652DD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				550D4B5B88B41087DEBBEFAE /* Pods_AR_Planes.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,9 +101,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2E6740A21F6D018400EEF5CE /* Build configuration list for PBXNativeTarget "AR Planes" */;
 			buildPhases = (
+				21570C7AB969484670B37102 /* [CP] Check Pods Manifest.lock */,
 				2E67408A1F6D018400EEF5CE /* Sources */,
 				2E67408B1F6D018400EEF5CE /* Frameworks */,
 				2E67408C1F6D018400EEF5CE /* Resources */,
+				B82CE03CCF7C65C153EF2D61 /* [CP] Embed Pods Frameworks */,
+				B8F8555FAF574515667CFE3E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -137,6 +164,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		21570C7AB969484670B37102 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B82CE03CCF7C65C153EF2D61 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AR Planes/Pods-AR Planes-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B8F8555FAF574515667CFE3E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AR Planes/Pods-AR Planes-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2E67408A1F6D018400EEF5CE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -190,6 +265,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -245,6 +322,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -275,9 +354,10 @@
 		};
 		2E6740A31F6D018400EEF5CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2B8B8721E21515F702D6FC9 /* Pods-AR Planes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = FZ89A5SZ7C;
+				DEVELOPMENT_TEAM = 8GEKYYW3CQ;
 				INFOPLIST_FILE = "AR Planes/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hackthenorth.AR-Planes";
@@ -289,9 +369,10 @@
 		};
 		2E6740A41F6D018400EEF5CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 097E279DD0DF170C0612A52F /* Pods-AR Planes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = FZ89A5SZ7C;
+				DEVELOPMENT_TEAM = 8GEKYYW3CQ;
 				INFOPLIST_FILE = "AR Planes/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hackthenorth.AR-Planes";
@@ -320,6 +401,7 @@
 				2E6740A41F6D018400EEF5CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

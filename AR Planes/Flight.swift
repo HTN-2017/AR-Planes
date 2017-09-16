@@ -12,7 +12,6 @@ import CoreLocation
 struct Flight {
     
     let callsign: String
-    
     let longitude: Double
     let latitude: Double
     let altitude: Double
@@ -51,7 +50,6 @@ struct Flight {
             let flights = flightData.flatMap(Flight.init(fromOpenSkyArray:))
             handler(flights)
         }
-        
         request.resume()
     }
 }
