@@ -9,10 +9,13 @@
 import UIKit
 import SceneKit
 import ARKit
+import CoreLocation
 
-class ViewController: UIViewController, ARSCNViewDelegate {
-
+class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
+    
     @IBOutlet var sceneView: ARSCNView!
+    
+    var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,10 +37,44 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillAppear(animated)
         
         // Create a session configuration
-        let configuration = ARWorldTrackingSessionConfiguration()
+        let configuration = ARWorldTrackingConfiguration()
         
         // Run the view's session
         sceneView.session.run(configuration)
+        
+        getUserLocation()
+    }
+    
+    func getUserLocation() {
+        // Initialize
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        
+        // Highest accuracy
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        // Request location when app is in use
+        locationManager.requestWhenInUseAuthorization()
+        
+        // Update location if authorized
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    // Called every time location changes
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation:CLLocation = locations[0] as CLLocation
+        
+        // Print coordinates
+        print("user latitude = \(userLocation.coordinate.latitude)")
+        print("user longitude = \(userLocation.coordinate.longitude)")
+    }
+    
+    // Called if location manager fails to update
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    {
+        print("\(error)")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -51,17 +88,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
-
+    
     // MARK: - ARSCNViewDelegate
     
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
+    /*
+     // Override to create and configure nodes for anchors added to the view's session.
+     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+     let node = SCNNode()
      
-        return node
-    }
-*/
+     return node
+     }
+     */
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
