@@ -10,7 +10,6 @@ import UIKit
 import SceneKit
 import ARKit
 import CoreLocation
-import Starscream
 
 class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
     
@@ -25,7 +24,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         sceneView.delegate = self
         
         // Show statistics such as fps and timing information
-        sceneView.showsStatistics = false
+        sceneView.showsStatistics = true
         
         // Create a new scene
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
@@ -37,13 +36,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        socket = WebSocket(url: URL(string: "ws://localhost:8080/")!)
-        socket.delegate = self
-        socket.connect()
-        
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-        configuration.worldAlignment = .gravityAndHeading
         
         // Run the view's session
         sceneView.session.run(configuration)
@@ -72,7 +66,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation:CLLocation = locations[0] as CLLocation
         
-        // Coordinates
+        // Print coordinates
         guard let altitude = locations.last?.altitude else { return }
         let userLatitude = userLocation.coordinate.latitude
         let userLongitude = userLocation.coordinate.longitude
