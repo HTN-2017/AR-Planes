@@ -1,0 +1,6 @@
+framework module Pods_AR_Planes {
+  umbrella header "Pods-AR Planes-umbrella.h"
+
+  export *
+  module * { export * }
+}

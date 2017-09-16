@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18AB32029FCDC13886937075 /* Pods_AR_Planes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A316EF298119193D66BD6418 /* Pods_AR_Planes.framework */; };
 		2E6740921F6D018400EEF5CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6740911F6D018400EEF5CE /* AppDelegate.swift */; };
 		2E6740941F6D018400EEF5CE /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E6740931F6D018400EEF5CE /* art.scnassets */; };
 		2E6740961F6D018400EEF5CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6740951F6D018400EEF5CE /* ViewController.swift */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0606FDA1BCAABFC888806841 /* Pods-AR Planes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR Planes.release.xcconfig"; path = "Pods/Target Support Files/Pods-AR Planes/Pods-AR Planes.release.xcconfig"; sourceTree = "<group>"; };
+		251096B6E696B249EB3C1D11 /* Pods-AR Planes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR Planes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AR Planes/Pods-AR Planes.debug.xcconfig"; sourceTree = "<group>"; };
 		2E67408E1F6D018400EEF5CE /* AR Planes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AR Planes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E6740911F6D018400EEF5CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E6740931F6D018400EEF5CE /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -26,6 +29,7 @@
 		2E67409D1F6D018400EEF5CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E67409F1F6D018400EEF5CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E6740A51F6D728200EEF5CE /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
+		A316EF298119193D66BD6418 /* Pods_AR_Planes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AR_Planes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +37,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18AB32029FCDC13886937075 /* Pods_AR_Planes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E80505C8878F246E2DF2F79 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				251096B6E696B249EB3C1D11 /* Pods-AR Planes.debug.xcconfig */,
+				0606FDA1BCAABFC888806841 /* Pods-AR Planes.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		2E6740851F6D018400EEF5CE = {
 			isa = PBXGroup;
 			children = (
 				2E6740901F6D018400EEF5CE /* AR Planes */,
 				2E67408F1F6D018400EEF5CE /* Products */,
+				0E80505C8878F246E2DF2F79 /* Pods */,
+				6DEADCDFDEC8167B8B75412A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,6 +86,14 @@
 			path = "AR Planes";
 			sourceTree = "<group>";
 		};
+		6DEADCDFDEC8167B8B75412A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A316EF298119193D66BD6418 /* Pods_AR_Planes.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,9 +101,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2E6740A21F6D018400EEF5CE /* Build configuration list for PBXNativeTarget "AR Planes" */;
 			buildPhases = (
+				45687045972B85B8D7714B44 /* [CP] Check Pods Manifest.lock */,
 				2E67408A1F6D018400EEF5CE /* Sources */,
 				2E67408B1F6D018400EEF5CE /* Frameworks */,
 				2E67408C1F6D018400EEF5CE /* Resources */,
+				8D9AF0457D6078518B8948BF /* [CP] Embed Pods Frameworks */,
+				D7D8637B5F4DD22988739105 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -136,6 +163,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		45687045972B85B8D7714B44 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8D9AF0457D6078518B8948BF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AR Planes/Pods-AR Planes-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D7D8637B5F4DD22988739105 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AR Planes/Pods-AR Planes-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2E67408A1F6D018400EEF5CE /* Sources */ = {
@@ -275,9 +350,10 @@
 		};
 		2E6740A31F6D018400EEF5CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 251096B6E696B249EB3C1D11 /* Pods-AR Planes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = FZ89A5SZ7C;
+				DEVELOPMENT_TEAM = 8GEKYYW3CQ;
 				INFOPLIST_FILE = "AR Planes/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hackthenorth.AR-Planes";
@@ -289,9 +365,10 @@
 		};
 		2E6740A41F6D018400EEF5CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0606FDA1BCAABFC888806841 /* Pods-AR Planes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = FZ89A5SZ7C;
+				DEVELOPMENT_TEAM = 8GEKYYW3CQ;
 				INFOPLIST_FILE = "AR Planes/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hackthenorth.AR-Planes";
@@ -320,6 +397,7 @@
 				2E6740A41F6D018400EEF5CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

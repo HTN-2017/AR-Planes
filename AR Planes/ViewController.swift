@@ -10,11 +10,17 @@ import UIKit
 import SceneKit
 import ARKit
 import CoreLocation
+import Starscream
 
 class ViewController: UIViewController, ARSCNViewDelegate {
+
+    var socket = WebSocket(url: URL(string: "ws://34.232.80.41/")!)
     
     @IBOutlet var sceneView: ARSCNView!
     fileprivate let locationManager = CLLocationManager()
+    
+    var userLatitude: CLLocationDegrees = 0
+    var userLongitude: CLLocationDegrees = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,13 +36,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Set the scene to the view
         sceneView.scene = scene
+        
+        // Connect to web socket
+        socket.delegate = self
+        socket.connect()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Create a session configuration
-        let configuration = ARWorldTrackingSessionConfiguration()
+        let configuration = ARWorldTrackingConfiguration()
         
         // Run the view's session
         sceneView.session.run(configuration)
@@ -69,18 +79,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
-        
     }
     
     func sessionWasInterrupted(_ session: ARSession) {
         // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
     }
     
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
     }
+
 }
 
 // MARK: - CLLocationManagerDelegate
@@ -109,8 +117,8 @@ extension ViewController: CLLocationManagerDelegate {
         
         // Print coordinates
         guard let altitude = locations.last?.altitude else { return }
-        let userLatitude = userLocation.coordinate.latitude
-        let userLongitude = userLocation.coordinate.longitude
+        userLatitude = userLocation.coordinate.latitude
+        userLongitude = userLocation.coordinate.longitude
         
     }
     
@@ -120,4 +128,23 @@ extension ViewController: CLLocationManagerDelegate {
         print("\(error)")
     }
     
+}
+
+// MARK: - WebSocketDelegate
+extension ViewController: WebSocketDelegate {
+    func websocketDidConnect(socket: WebSocket) {
+        socket.write(string: "\(userLatitude),\(userLongitude)")
+    }
+    
+    func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
+        print("disconnected")
+    }
+    
+    func websocketDidReceiveMessage(socket: WebSocket, text: String) {
+        print("\(text)")
+    }
+    
+    func websocketDidReceiveData(socket: WebSocket, data: Data) {
+        print("data")
+    }
 }
