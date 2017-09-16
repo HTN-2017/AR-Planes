@@ -8,5 +8,6 @@ target 'AR Planes' do
   # Pods for AR Planes
 
 pod ‘Starscream’ 
+pod 'Kanna', '~> 2.1.0'
 
 end

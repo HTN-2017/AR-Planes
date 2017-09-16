@@ -43,9 +43,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                         to: flight.sceneKitCoordinate(relativeTo: userLocation),
                         duration: serverPollingInterval)
                     
-                    let rotate = SCNAction.rotate(
+                    /*let rotate = SCNAction.rotate(
                         toAxisAngle: flight.sceneKitRotation(),
-                        duration: serverPollingInterval)
+                        duration: serverPollingInterval)*/
                     
                     existingNode.runAction(.group([move/*, rotate*/]))
                 }

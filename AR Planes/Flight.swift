@@ -72,6 +72,9 @@ struct Flight {
         self.altitude = altitude
         self.heading = heading
     }
+    
+    // MARK: - Scrape additional info from flightaware.com
+    
 }
 
 // MARK: - CLLocationCoordinate2D + Heading

@@ -3,83 +3,137 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		18A8C2221F3EFA2960B7F1CC14A5516E /* Pods-AR Planes-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F88240F0B4CEA0D49353DEDEE68291A /* Pods-AR Planes-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AB2B5EF8DA482EE31000970630EDF377 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		AE0E1AC8FFDD14DE1D34598A11EEF324 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		AEB722A7367C357E550432E2BC0AA749 /* Starscream-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C68709AD24C7C219C62AAED237316D62 /* Starscream-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CB28C48CFC1884FA152A4FA4462DE70D /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523AF4340DDEE0D98CEE49D4A1E8452 /* WebSocket.swift */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		D592DFA081252091B94C63A6B47E7701 /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AADA7010B5EDC38CDC775A0A6F512A /* SSLSecurity.swift */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		E4D8182F9181D64DFD3FD4000A52DDC6 /* Pods-AR Planes-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2F78EC6C5BE35C3E09C3B2F3D79889 /* Pods-AR Planes-dummy.m */; };
-		F14262189CDD1CADB10B90C2CBB48634 /* Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF02D060F8352ABA7FD1BC2C0445CDE8 /* Compression.swift */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		FAFB47EA9A0F1A0F94285384352F87DA /* Starscream-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D124F5C49E485909E43F371B7F5D917B /* Starscream-dummy.m */; };
+		08700CBB713B443AFA394EFD6B74E402 /* libxmlHTMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078348072866B419849C58D644F11946 /* libxmlHTMLNode.swift */; };
+		1B649ED24EA10556087692EAFA721BD4 /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4579BE416816EA9AFBEFEB0142D595CC /* SSLSecurity.swift */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1C3D3B0412D67DD5754777537E98AD7D /* Starscream-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CFD65F352BF69A37C3BCD31A3529741B /* Starscream-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		322F32F75AC8A04064F70A089800AF88 /* Kanna-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AC8C3710574594ED60B35FAD3FFB0235 /* Kanna-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3DB400D8B8AADDF43E1439E3441E814B /* Kanna-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A99426FAE7E96951C476E0DF8D550034 /* Kanna-dummy.m */; };
+		403A56ED8092BC41B0630E678265944B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		436871564BF1C99AA86206B69CDB40DD /* Kanna.h in Headers */ = {isa = PBXBuildFile; fileRef = 96DBEF8ED1B2ED4B5FE92C6E69C44803 /* Kanna.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		502A4ED61B7499F836F0BB471B69D0E3 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5716FB6D66079E01D280F445759F8E79 /* WebSocket.swift */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		50C0E880875CC6F8594B2D292287DF66 /* Starscream-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA944EEDAED30A01D8E959D7E683863 /* Starscream-dummy.m */; };
+		512666B1233076C6F3DF054825CE87EA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		634F01C0D06986FD15F647234ADA7CBC /* Kanna.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9018E58C3BB1218AFA379514180B8B8 /* Kanna.swift */; };
+		781A4D12CC4A83EA4705C6029254B012 /* libxmlHTMLDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB28553C57AD623F372674098CFEB5B5 /* libxmlHTMLDocument.swift */; };
+		979C8EF2855F4CE5502D8A5CA63693E3 /* Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2416464699CE35B34D5C2F1E3A6C2F54 /* Compression.swift */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AF863C36D259D89189A0BDF54912C76E /* CSS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E095046436535B7FD6D2F2DD0A22719 /* CSS.swift */; };
+		B54BC96E0E624C26D2232659C84D4AEF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		D62476194D4A9C107D293953FAF1E62A /* Pods-AR Planes-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2F78EC6C5BE35C3E09C3B2F3D79889 /* Pods-AR Planes-dummy.m */; };
+		DA9698FC9A9AF3873A2DBD53CFBD2CC8 /* Pods-AR Planes-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F88240F0B4CEA0D49353DEDEE68291A /* Pods-AR Planes-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FD87F8764674EFAAF3AABCA2552E5127 /* libxmlParserOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF18448E1F496CFFC3BD7AEBA2A3FD2 /* libxmlParserOption.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9598046E658F6B09A0AC84236F80D041 /* PBXContainerItemProxy */ = {
+		86DF12247C13EF8F641598B5D9844742 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = B91D1FBDB9340E5CC856DEFC8B958FF3;
+			remoteGlobalIDString = 048AB039EDA0DF9A0B82ADE4E3CDCF79;
 			remoteInfo = Starscream;
+		};
+		F934CFC344F891B06F7E0AF975A2C9E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D10E4FF5A483B852B47CCA0B994E340;
+			remoteInfo = Kanna;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		11163465022C8F3770EFDFB5745582CB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		02510DF70AF6B7232C4AED7273A85240 /* Starscream.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Starscream.xcconfig; sourceTree = "<group>"; };
+		03524F359F621A39367FEB77ACEA22B1 /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		03C64656ED4E4E0F0FC9B0F3141C05EC /* Starscream.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Starscream.modulemap; sourceTree = "<group>"; };
+		078348072866B419849C58D644F11946 /* libxmlHTMLNode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = libxmlHTMLNode.swift; path = Sources/Kanna/libxmlHTMLNode.swift; sourceTree = "<group>"; };
+		0E095046436535B7FD6D2F2DD0A22719 /* CSS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CSS.swift; path = Sources/Kanna/CSS.swift; sourceTree = "<group>"; };
 		1F8A8A92A1A088844F90D0F739D1D2CA /* Pods-AR Planes-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AR Planes-acknowledgements.plist"; sourceTree = "<group>"; };
+		2416464699CE35B34D5C2F1E3A6C2F54 /* Compression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Compression.swift; path = Source/Compression.swift; sourceTree = "<group>"; };
+		34C0C9E68D729F00FFE6939953130804 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E1C40002F71942DCEE1F71325E2E717 /* Kanna.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Kanna.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4167D133FF99C6F0662817FF163DC88A /* Pods-AR Planes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AR Planes.release.xcconfig"; sourceTree = "<group>"; };
-		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		4579BE416816EA9AFBEFEB0142D595CC /* SSLSecurity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SSLSecurity.swift; path = Source/SSLSecurity.swift; sourceTree = "<group>"; };
+		4C6BE07EDFEA8C83011C6202FC7708AC /* Kanna.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Kanna.modulemap; sourceTree = "<group>"; };
+		5716FB6D66079E01D280F445759F8E79 /* WebSocket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebSocket.swift; path = Source/WebSocket.swift; sourceTree = "<group>"; };
 		675EE3C679A4C53D28F8008F0BFE95A2 /* Pods-AR Planes-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AR Planes-frameworks.sh"; sourceTree = "<group>"; };
 		692C82659942AD8DE138A19A9B76E57C /* Pods-AR Planes-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AR Planes-acknowledgements.markdown"; sourceTree = "<group>"; };
-		72B260626E5F18D3FCC9D603AFF0787C /* Pods_AR_Planes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AR_Planes.framework; path = "Pods-AR Planes.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		74288B4A2458B02AFFA08C118A157ADC /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Starscream.framework; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		76AADA7010B5EDC38CDC775A0A6F512A /* SSLSecurity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SSLSecurity.swift; path = Source/SSLSecurity.swift; sourceTree = "<group>"; };
+		7B39F1B667858500A4987DFC2DE0286C /* Starscream-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-prefix.pch"; sourceTree = "<group>"; };
+		7E57D1B7DD89E2C330A40C73DDA92150 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88F11DEDEE8678E6B2B0044C3946D581 /* Pods-AR Planes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AR Planes.debug.xcconfig"; sourceTree = "<group>"; };
-		8A735668F01CA387FBAD96C1001BD19C /* Starscream.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Starscream.modulemap; sourceTree = "<group>"; };
-		8BF5791F7A584CD03F3C60C4C84798D9 /* Pods-AR Planes.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-AR Planes.modulemap"; sourceTree = "<group>"; };
+		8BF5791F7A584CD03F3C60C4C84798D9 /* Pods-AR Planes.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-AR Planes.modulemap"; sourceTree = "<group>"; };
 		8F88240F0B4CEA0D49353DEDEE68291A /* Pods-AR Planes-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AR Planes-umbrella.h"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		96DBEF8ED1B2ED4B5FE92C6E69C44803 /* Kanna.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Kanna.h; path = Sources/Kanna/Kanna.h; sourceTree = "<group>"; };
 		9E2B3F50FF32FA893D9031541B90392D /* Pods-AR Planes-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AR Planes-resources.sh"; sourceTree = "<group>"; };
-		B64A819FC892CEE7DA2E10BA577E4C10 /* Starscream.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Starscream.xcconfig; sourceTree = "<group>"; };
-		BF02D060F8352ABA7FD1BC2C0445CDE8 /* Compression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Compression.swift; path = Source/Compression.swift; sourceTree = "<group>"; };
-		C68709AD24C7C219C62AAED237316D62 /* Starscream-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-umbrella.h"; sourceTree = "<group>"; };
-		D124F5C49E485909E43F371B7F5D917B /* Starscream-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Starscream-dummy.m"; sourceTree = "<group>"; };
+		A9018E58C3BB1218AFA379514180B8B8 /* Kanna.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Kanna.swift; path = Sources/Kanna/Kanna.swift; sourceTree = "<group>"; };
+		A99426FAE7E96951C476E0DF8D550034 /* Kanna-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Kanna-dummy.m"; sourceTree = "<group>"; };
+		AC8C3710574594ED60B35FAD3FFB0235 /* Kanna-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Kanna-umbrella.h"; sourceTree = "<group>"; };
+		CAA944EEDAED30A01D8E959D7E683863 /* Starscream-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Starscream-dummy.m"; sourceTree = "<group>"; };
+		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		CFD65F352BF69A37C3BCD31A3529741B /* Starscream-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-umbrella.h"; sourceTree = "<group>"; };
+		D82623B8E53800D6A079FDF2B41BC392 /* Pods_AR_Planes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AR_Planes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E183BA10DE6A5B5A6AC52A239289A74E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E523AF4340DDEE0D98CEE49D4A1E8452 /* WebSocket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebSocket.swift; path = Source/WebSocket.swift; sourceTree = "<group>"; };
+		EC41348359EAFB99AA3FA0B75B85DA9E /* Kanna-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Kanna-prefix.pch"; sourceTree = "<group>"; };
+		F0FD3C9B7E13747238153B65AE56BF05 /* Kanna.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Kanna.xcconfig; sourceTree = "<group>"; };
 		FA2F78EC6C5BE35C3E09C3B2F3D79889 /* Pods-AR Planes-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AR Planes-dummy.m"; sourceTree = "<group>"; };
-		FDDAC4066D734EF29F9958710F9EA58D /* Starscream-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-prefix.pch"; sourceTree = "<group>"; };
+		FAF18448E1F496CFFC3BD7AEBA2A3FD2 /* libxmlParserOption.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = libxmlParserOption.swift; path = Sources/Kanna/libxmlParserOption.swift; sourceTree = "<group>"; };
+		FB28553C57AD623F372674098CFEB5B5 /* libxmlHTMLDocument.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = libxmlHTMLDocument.swift; path = Sources/Kanna/libxmlHTMLDocument.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		153CCDF43136B5EC2510028DE1F5C2DF /* Frameworks */ = {
+		5B3325BA6C39D598EE3ED8D497D7E32F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB2B5EF8DA482EE31000970630EDF377 /* Foundation.framework in Frameworks */,
+				B54BC96E0E624C26D2232659C84D4AEF /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C9D208FF5AE7A490E08D8DD9AC662490 /* Frameworks */ = {
+		B26FEF1A0E7E734EE57A74A7D845B0F9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE0E1AC8FFDD14DE1D34598A11EEF324 /* Foundation.framework in Frameworks */,
+				403A56ED8092BC41B0630E678265944B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B80B6B6BF6945069245681F3B1B3E566 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				512666B1233076C6F3DF054825CE87EA /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3472A81D0DB31608B2D83C2463248903 /* Pods */ = {
+		2F169B68BF1E72586C7E1570A418194F /* Starscream */ = {
 			isa = PBXGroup;
 			children = (
-				DCF5E13B463E70642A64AB4B62103986 /* Starscream */,
+				2416464699CE35B34D5C2F1E3A6C2F54 /* Compression.swift */,
+				4579BE416816EA9AFBEFEB0142D595CC /* SSLSecurity.swift */,
+				5716FB6D66079E01D280F445759F8E79 /* WebSocket.swift */,
+				47BF1208C19BF969D7AF15D023CD9CEF /* Support Files */,
 			);
-			name = Pods;
+			path = Starscream;
+			sourceTree = "<group>";
+		};
+		47BF1208C19BF969D7AF15D023CD9CEF /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7E57D1B7DD89E2C330A40C73DDA92150 /* Info.plist */,
+				03C64656ED4E4E0F0FC9B0F3141C05EC /* Starscream.modulemap */,
+				02510DF70AF6B7232C4AED7273A85240 /* Starscream.xcconfig */,
+				CAA944EEDAED30A01D8E959D7E683863 /* Starscream-dummy.m */,
+				7B39F1B667858500A4987DFC2DE0286C /* Starscream-prefix.pch */,
+				CFD65F352BF69A37C3BCD31A3529741B /* Starscream-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Starscream";
 			sourceTree = "<group>";
 		};
 		4B312739BA014060A7C5CB237302B063 /* Targets Support Files */ = {
@@ -108,13 +162,26 @@
 			path = "Target Support Files/Pods-AR Planes";
 			sourceTree = "<group>";
 		};
-		61303E20398BF4813A8A6FE3313C804B /* Products */ = {
+		6593EE8F231817A105BF249835A3141E /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				72B260626E5F18D3FCC9D603AFF0787C /* Pods_AR_Planes.framework */,
-				74288B4A2458B02AFFA08C118A157ADC /* Starscream.framework */,
+				34C0C9E68D729F00FFE6939953130804 /* Info.plist */,
+				4C6BE07EDFEA8C83011C6202FC7708AC /* Kanna.modulemap */,
+				F0FD3C9B7E13747238153B65AE56BF05 /* Kanna.xcconfig */,
+				A99426FAE7E96951C476E0DF8D550034 /* Kanna-dummy.m */,
+				EC41348359EAFB99AA3FA0B75B85DA9E /* Kanna-prefix.pch */,
+				AC8C3710574594ED60B35FAD3FFB0235 /* Kanna-umbrella.h */,
 			);
-			name = Products;
+			name = "Support Files";
+			path = "../Target Support Files/Kanna";
+			sourceTree = "<group>";
+		};
+		7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -122,101 +189,91 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				3472A81D0DB31608B2D83C2463248903 /* Pods */,
-				61303E20398BF4813A8A6FE3313C804B /* Products */,
+				E75C80B80622C2570189318A5DF9ED77 /* Pods */,
+				AF879206276AAAC60AE7893A9C8B202D /* Products */,
 				4B312739BA014060A7C5CB237302B063 /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		AAD6C15954C1A777E7CAD8AA7DB7090C /* Kanna */ = {
+			isa = PBXGroup;
+			children = (
+				0E095046436535B7FD6D2F2DD0A22719 /* CSS.swift */,
+				96DBEF8ED1B2ED4B5FE92C6E69C44803 /* Kanna.h */,
+				A9018E58C3BB1218AFA379514180B8B8 /* Kanna.swift */,
+				FB28553C57AD623F372674098CFEB5B5 /* libxmlHTMLDocument.swift */,
+				078348072866B419849C58D644F11946 /* libxmlHTMLNode.swift */,
+				FAF18448E1F496CFFC3BD7AEBA2A3FD2 /* libxmlParserOption.swift */,
+				6593EE8F231817A105BF249835A3141E /* Support Files */,
+			);
+			path = Kanna;
+			sourceTree = "<group>";
+		};
+		AF879206276AAAC60AE7893A9C8B202D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3E1C40002F71942DCEE1F71325E2E717 /* Kanna.framework */,
+				D82623B8E53800D6A079FDF2B41BC392 /* Pods_AR_Planes.framework */,
+				03524F359F621A39367FEB77ACEA22B1 /* Starscream.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D35AF013A5F0BAD4F32504907A52519E /* iOS */,
+				7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
+		E75C80B80622C2570189318A5DF9ED77 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */,
+				AAD6C15954C1A777E7CAD8AA7DB7090C /* Kanna */,
+				2F169B68BF1E72586C7E1570A418194F /* Starscream */,
 			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		DCF5E13B463E70642A64AB4B62103986 /* Starscream */ = {
-			isa = PBXGroup;
-			children = (
-				BF02D060F8352ABA7FD1BC2C0445CDE8 /* Compression.swift */,
-				76AADA7010B5EDC38CDC775A0A6F512A /* SSLSecurity.swift */,
-				E523AF4340DDEE0D98CEE49D4A1E8452 /* WebSocket.swift */,
-				DEAFE5CC16652B66664C99406F6EA5DC /* Support Files */,
-			);
-			name = Starscream;
-			path = Starscream;
-			sourceTree = "<group>";
-		};
-		DEAFE5CC16652B66664C99406F6EA5DC /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				11163465022C8F3770EFDFB5745582CB /* Info.plist */,
-				8A735668F01CA387FBAD96C1001BD19C /* Starscream.modulemap */,
-				B64A819FC892CEE7DA2E10BA577E4C10 /* Starscream.xcconfig */,
-				D124F5C49E485909E43F371B7F5D917B /* Starscream-dummy.m */,
-				FDDAC4066D734EF29F9958710F9EA58D /* Starscream-prefix.pch */,
-				C68709AD24C7C219C62AAED237316D62 /* Starscream-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Starscream";
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		858EED08840363BCDD80950C16A2755F /* Headers */ = {
+		1057EC4EEE2E8CECDCA828C54E26AA2B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18A8C2221F3EFA2960B7F1CC14A5516E /* Pods-AR Planes-umbrella.h in Headers */,
+				1C3D3B0412D67DD5754777537E98AD7D /* Starscream-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D3B7CDD870B7EE97FBD8F70EDB8906FD /* Headers */ = {
+		831EE0356CE79B156508707781DF1D2D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEB722A7367C357E550432E2BC0AA749 /* Starscream-umbrella.h in Headers */,
+				DA9698FC9A9AF3873A2DBD53CFBD2CC8 /* Pods-AR Planes-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3CA17BFDDB0A81444254ACD04D49309 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				322F32F75AC8A04064F70A089800AF88 /* Kanna-umbrella.h in Headers */,
+				436871564BF1C99AA86206B69CDB40DD /* Kanna.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		99A66D1F2F249E176D32282983B6AB56 /* Pods-AR Planes */ = {
+		048AB039EDA0DF9A0B82ADE4E3CDCF79 /* Starscream */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C332F033FEE6BB30CDE39252617F3E7A /* Build configuration list for PBXNativeTarget "Pods-AR Planes" */;
+			buildConfigurationList = DEEF3C4252DEFE051A223E578AF623DC /* Build configuration list for PBXNativeTarget "Starscream" */;
 			buildPhases = (
-				35849EFB41DECEC481A258BF0100806D /* Sources */,
-				C9D208FF5AE7A490E08D8DD9AC662490 /* Frameworks */,
-				858EED08840363BCDD80950C16A2755F /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B53A5ED26B21B31D3D12B41466022C5D /* PBXTargetDependency */,
-			);
-			name = "Pods-AR Planes";
-			productName = "Pods-AR Planes";
-			productReference = 72B260626E5F18D3FCC9D603AFF0787C /* Pods_AR_Planes.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		B91D1FBDB9340E5CC856DEFC8B958FF3 /* Starscream */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DC928897B0938E8D19572F1DDE1DBABD /* Build configuration list for PBXNativeTarget "Starscream" */;
-			buildPhases = (
-				34ED8752DA393B8A510591A53B46C8B3 /* Sources */,
-				153CCDF43136B5EC2510028DE1F5C2DF /* Frameworks */,
-				D3B7CDD870B7EE97FBD8F70EDB8906FD /* Headers */,
+				C61F43373C230E4273C7430F847AA448 /* Sources */,
+				5B3325BA6C39D598EE3ED8D497D7E32F /* Frameworks */,
+				1057EC4EEE2E8CECDCA828C54E26AA2B /* Headers */,
 			);
 			buildRules = (
 			);
@@ -224,7 +281,43 @@
 			);
 			name = Starscream;
 			productName = Starscream;
-			productReference = 74288B4A2458B02AFFA08C118A157ADC /* Starscream.framework */;
+			productReference = 03524F359F621A39367FEB77ACEA22B1 /* Starscream.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4D10E4FF5A483B852B47CCA0B994E340 /* Kanna */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 032FE6A4FF03E43B2C60899A35389C7F /* Build configuration list for PBXNativeTarget "Kanna" */;
+			buildPhases = (
+				252B13ABC5AE0EA65897098097C1703E /* Sources */,
+				B26FEF1A0E7E734EE57A74A7D845B0F9 /* Frameworks */,
+				A3CA17BFDDB0A81444254ACD04D49309 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Kanna;
+			productName = Kanna;
+			productReference = 3E1C40002F71942DCEE1F71325E2E717 /* Kanna.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		EB5EB87832A4932AFF9EDAA218D4E0B9 /* Pods-AR Planes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D22F0AB2E17EAADD770C68DD0BB9D03 /* Build configuration list for PBXNativeTarget "Pods-AR Planes" */;
+			buildPhases = (
+				19D5EC8AF7244A2AD684FBFEB7775063 /* Sources */,
+				B80B6B6BF6945069245681F3B1B3E566 /* Frameworks */,
+				831EE0356CE79B156508707781DF1D2D /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9427C05B44B1AD89B26F8E55B13559E /* PBXTargetDependency */,
+				780EC3560D7B261E101D567B761EF6B4 /* PBXTargetDependency */,
+			);
+			name = "Pods-AR Planes";
+			productName = "Pods-AR Planes";
+			productReference = D82623B8E53800D6A079FDF2B41BC392 /* Pods_AR_Planes.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -233,7 +326,7 @@
 		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
@@ -244,54 +337,242 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 61303E20398BF4813A8A6FE3313C804B /* Products */;
+			productRefGroup = AF879206276AAAC60AE7893A9C8B202D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				99A66D1F2F249E176D32282983B6AB56 /* Pods-AR Planes */,
-				B91D1FBDB9340E5CC856DEFC8B958FF3 /* Starscream */,
+				4D10E4FF5A483B852B47CCA0B994E340 /* Kanna */,
+				EB5EB87832A4932AFF9EDAA218D4E0B9 /* Pods-AR Planes */,
+				048AB039EDA0DF9A0B82ADE4E3CDCF79 /* Starscream */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		34ED8752DA393B8A510591A53B46C8B3 /* Sources */ = {
+		19D5EC8AF7244A2AD684FBFEB7775063 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F14262189CDD1CADB10B90C2CBB48634 /* Compression.swift in Sources */,
-				D592DFA081252091B94C63A6B47E7701 /* SSLSecurity.swift in Sources */,
-				FAFB47EA9A0F1A0F94285384352F87DA /* Starscream-dummy.m in Sources */,
-				CB28C48CFC1884FA152A4FA4462DE70D /* WebSocket.swift in Sources */,
+				D62476194D4A9C107D293953FAF1E62A /* Pods-AR Planes-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		35849EFB41DECEC481A258BF0100806D /* Sources */ = {
+		252B13ABC5AE0EA65897098097C1703E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4D8182F9181D64DFD3FD4000A52DDC6 /* Pods-AR Planes-dummy.m in Sources */,
+				AF863C36D259D89189A0BDF54912C76E /* CSS.swift in Sources */,
+				3DB400D8B8AADDF43E1439E3441E814B /* Kanna-dummy.m in Sources */,
+				634F01C0D06986FD15F647234ADA7CBC /* Kanna.swift in Sources */,
+				781A4D12CC4A83EA4705C6029254B012 /* libxmlHTMLDocument.swift in Sources */,
+				08700CBB713B443AFA394EFD6B74E402 /* libxmlHTMLNode.swift in Sources */,
+				FD87F8764674EFAAF3AABCA2552E5127 /* libxmlParserOption.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C61F43373C230E4273C7430F847AA448 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				979C8EF2855F4CE5502D8A5CA63693E3 /* Compression.swift in Sources */,
+				1B649ED24EA10556087692EAFA721BD4 /* SSLSecurity.swift in Sources */,
+				50C0E880875CC6F8594B2D292287DF66 /* Starscream-dummy.m in Sources */,
+				502A4ED61B7499F836F0BB471B69D0E3 /* WebSocket.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B53A5ED26B21B31D3D12B41466022C5D /* PBXTargetDependency */ = {
+		780EC3560D7B261E101D567B761EF6B4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Starscream;
-			target = B91D1FBDB9340E5CC856DEFC8B958FF3 /* Starscream */;
-			targetProxy = 9598046E658F6B09A0AC84236F80D041 /* PBXContainerItemProxy */;
+			target = 048AB039EDA0DF9A0B82ADE4E3CDCF79 /* Starscream */;
+			targetProxy = 86DF12247C13EF8F641598B5D9844742 /* PBXContainerItemProxy */;
+		};
+		A9427C05B44B1AD89B26F8E55B13559E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Kanna;
+			target = 4D10E4FF5A483B852B47CCA0B994E340 /* Kanna */;
+			targetProxy = F934CFC344F891B06F7E0AF975A2C9E9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		1A41B15D3AA834993ADDD808FA9D8764 /* Release */ = {
+		05C46A8F5B313BF4E3F3DCA1A6FD8EDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88F11DEDEE8678E6B2B0044C3946D581 /* Pods-AR Planes.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-AR Planes/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-AR Planes/Pods-AR Planes.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_AR_Planes;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		1A150D8B5AB0014D9427001178B65FE8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02510DF70AF6B7232C4AED7273A85240 /* Starscream.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Starscream/Starscream-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Starscream/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Starscream/Starscream.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = Starscream;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		857D79116CAA2B0C9775F36AC456ED54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4167D133FF99C6F0662817FF163DC88A /* Pods-AR Planes.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-AR Planes/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-AR Planes/Pods-AR Planes.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_AR_Planes;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9A2AA48A93999BD7B7CBDF9935AF3B97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02510DF70AF6B7232C4AED7273A85240 /* Starscream.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Starscream/Starscream-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Starscream/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Starscream/Starscream.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = Starscream;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9B16C965E683C742FE36FDD9B6A21370 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0FD3C9B7E13747238153B65AE56BF05 /* Kanna.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Kanna/Kanna-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Kanna/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Kanna/Kanna.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = Kanna;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9C7A5EE6DE2C3784BAA89D1A5D5EB30D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -299,13 +580,10 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
@@ -330,46 +608,11 @@
 			};
 			name = Release;
 		};
-		41B055DDFE02BEE14DC20E853D839C44 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B64A819FC892CEE7DA2E10BA577E4C10 /* Starscream.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Starscream/Starscream-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Starscream/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Starscream/Starscream.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = Starscream;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		7D144F724433A09597E3476A57631255 /* Debug */ = {
+		CE5513B3E35A5C69E7F70F186BD3CE9C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -377,13 +620,10 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
@@ -412,11 +652,10 @@
 			};
 			name = Debug;
 		};
-		7F55324E49489C4A6D7880E19986BDAF /* Release */ = {
+		D850E973ECF48E3C355D03DEF1D2014E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4167D133FF99C6F0662817FF163DC88A /* Pods-AR Planes.release.xcconfig */;
+			baseConfigurationReference = F0FD3C9B7E13747238153B65AE56BF05 /* Kanna.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -428,21 +667,16 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-AR Planes/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/Kanna/Kanna-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Kanna/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-AR Planes/Pods-AR Planes.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Kanna/Kanna.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_AR_Planes;
+				PRODUCT_NAME = Kanna;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -450,106 +684,41 @@
 			};
 			name = Release;
 		};
-		8D5021FB6F8FAF2B8137DA79BBC7EB25 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B64A819FC892CEE7DA2E10BA577E4C10 /* Starscream.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Starscream/Starscream-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Starscream/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Starscream/Starscream.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = Starscream;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		AE2EE133F7B2EFB5239E6241493DEDB2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 88F11DEDEE8678E6B2B0044C3946D581 /* Pods-AR Planes.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-AR Planes/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-AR Planes/Pods-AR Planes.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_AR_Planes;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		032FE6A4FF03E43B2C60899A35389C7F /* Build configuration list for PBXNativeTarget "Kanna" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B16C965E683C742FE36FDD9B6A21370 /* Debug */,
+				D850E973ECF48E3C355D03DEF1D2014E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7D144F724433A09597E3476A57631255 /* Debug */,
-				1A41B15D3AA834993ADDD808FA9D8764 /* Release */,
+				CE5513B3E35A5C69E7F70F186BD3CE9C /* Debug */,
+				9C7A5EE6DE2C3784BAA89D1A5D5EB30D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C332F033FEE6BB30CDE39252617F3E7A /* Build configuration list for PBXNativeTarget "Pods-AR Planes" */ = {
+		5D22F0AB2E17EAADD770C68DD0BB9D03 /* Build configuration list for PBXNativeTarget "Pods-AR Planes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AE2EE133F7B2EFB5239E6241493DEDB2 /* Debug */,
-				7F55324E49489C4A6D7880E19986BDAF /* Release */,
+				05C46A8F5B313BF4E3F3DCA1A6FD8EDB /* Debug */,
+				857D79116CAA2B0C9775F36AC456ED54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DC928897B0938E8D19572F1DDE1DBABD /* Build configuration list for PBXNativeTarget "Starscream" */ = {
+		DEEF3C4252DEFE051A223E578AF623DC /* Build configuration list for PBXNativeTarget "Starscream" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8D5021FB6F8FAF2B8137DA79BBC7EB25 /* Debug */,
-				41B055DDFE02BEE14DC20E853D839C44 /* Release */,
+				9A2AA48A93999BD7B7CBDF9935AF3B97 /* Debug */,
+				1A150D8B5AB0014D9427001178B65FE8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
