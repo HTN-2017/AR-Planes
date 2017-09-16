@@ -10,13 +10,20 @@ import UIKit
 import SceneKit
 import ARKit
 import CoreLocation
+import Starscream
 import ModelIO
 import SceneKit.ModelIO
 
 class ViewController: UIViewController, ARSCNViewDelegate {
+
+    var socket = WebSocket(url: URL(string: "ws://34.232.80.41/")!)
     
     @IBOutlet var sceneView: ARSCNView!
     fileprivate let locationManager = CLLocationManager()
+    
+    var userLatitude: CLLocationDegrees = 0
+    var userLongitude: CLLocationDegrees = 0
+    var airplaneArray: [Flight] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +39,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Set the scene to the view
         sceneView.scene = scene
+      
+        // Connect to web socket
+        socket.delegate = self
+        socket.connect()
+      
         sceneView.antialiasingMode = .multisampling2X
     }
     
@@ -98,18 +110,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
-        
     }
     
     func sessionWasInterrupted(_ session: ARSession) {
         // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
     }
     
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
     }
+
 }
 
 // MARK: - CLLocationManagerDelegate
@@ -138,9 +148,8 @@ extension ViewController: CLLocationManagerDelegate {
         
         // Print coordinates
         guard let altitude = locations.last?.altitude else { return }
-        let userLatitude = userLocation.coordinate.latitude
-        let userLongitude = userLocation.coordinate.longitude
-        
+        userLatitude = userLocation.coordinate.latitude
+        userLongitude = userLocation.coordinate.longitude
     }
     
     // Called if location manager fails to update
@@ -148,5 +157,47 @@ extension ViewController: CLLocationManagerDelegate {
     {
         print("\(error)")
     }
+}
+
+// MARK: - WebSocketDelegate
+extension ViewController: WebSocketDelegate {
+    func websocketDidConnect(socket: WebSocket) {
+        socket.write(string: "\(userLatitude),\(userLongitude)")
+    }
     
+    func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
+        print("disconnected")
+    }
+    
+    func websocketDidReceiveMessage(socket: WebSocket, text: String) {
+        let json = text.toJSON()
+        print(json)
+        if let flights = json as? [String: Any] {
+            for i in flights {
+                let call = flights["call"] as! String
+                let lat = flights["lat"] as! Double
+                let lng = flights["lng"] as! Double
+                let alt = flights["alt"] as! Double
+                let hdg = flights["hdg"]
+                let gvel = flights["gvel"]
+                let vvel = flights["vvel"]
+                
+                let airplane: Flight = Flight(callsign: call, longitude: lng, latitude: lat, altitude: alt)!
+                print(airplane)
+                
+                airplaneArray.append(airplane)
+            }
+        }
+    }
+    
+    func websocketDidReceiveData(socket: WebSocket, data: Data) {
+        print("data")
+    }
+}
+
+extension String {
+    func toJSON() -> Any? {
+        guard let data = self.data(using: .utf8, allowLossyConversion: false) else { return nil }
+        return try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+    }
 }
