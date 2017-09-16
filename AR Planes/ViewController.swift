@@ -27,21 +27,47 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
+    // MARK: - Flights
+    
     var nearbyFlights: [Flight] = [] {
         didSet {
             guard let userLocation = mostRecentUserLocation else {
                 return
             }
             
-            let newNodes = nearbyFlights.map { flight -> SCNNode in
-                let planeNode = nodeForPlane(color: .red)
-                planeNode.position = Flight.mock.sceneKitCoordinate(relativeTo: userLocation)
-                return planeNode
+            for flight in nearbyFlights {
+                //update existing node if it exists
+                if let existingNode = planeNodes[flight.icao] {
+                    existingNode.position = flight.sceneKitCoordinate(relativeTo: userLocation)
+                }
+                
+                //otherwise, make a new node
+                else {
+                    let newNode = newPlaneNode()
+                    planeNodes[flight.icao] = newNode
+                    
+                    newNode.position = flight.sceneKitCoordinate(relativeTo: userLocation)
+                    sceneView.scene.rootNode.addChildNode(newNode)
+                }
             }
-            
-            sceneView.scene.rootNode.childNodes.forEach { $0.removeFromParentNode() }
-            newNodes.forEach { sceneView.scene.rootNode.addChildNode($0) }
         }
+    }
+    
+    var planeNodes = [String: SCNNode]()
+    
+    lazy var planeModel: MDLObject = {
+        let planeAssetUrl = Bundle.main.url(forResource: "777", withExtension: "obj")!
+        return MDLAsset(url: planeAssetUrl).object(at: 0)
+    }()
+    
+    func newPlaneNode() -> SCNNode {
+        let planeNode = SCNNode(mdlObject: planeModel)
+        
+        let planeMaterial = SCNMaterial()
+        planeMaterial.diffuse.contents = UIColor.red
+        planeNode.geometry?.materials = [planeMaterial]
+        
+        return planeNode
     }
     
     override func viewDidLoad() {
@@ -67,31 +93,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.run(configuration)
         
         setUpLocationManager()
-        
-        /*let greenPlane = nodeForPlane(color: .green)
-        greenPlane.position = SCNVector3.init(500, 500, 500)
-        sceneView.scene.rootNode.addChildNode(greenPlane)
-        
-        let bluePlane = nodeForPlane(color: .green)
-        bluePlane.position = SCNVector3.init(0, 400, 0)
-        sceneView.scene.rootNode.addChildNode(bluePlane)
-        
-        let planeNode = nodeForPlane(color: .red)
-        let hardcodedLocation = CLLocation(latitude: 43.4729, longitude: -80.5402)
-        planeNode.position = Flight.mock.sceneKitCoordinate(relativeTo: hardcodedLocation)
-        sceneView.scene.rootNode.addChildNode(planeNode)*/
-    }
-    
-    func nodeForPlane(color: UIColor = .white) -> SCNNode {
-        let planeAssetUrl = Bundle.main.url(forResource: "777", withExtension: "obj")!
-        let planeAsset = MDLAsset(url: planeAssetUrl)
-        let planeNode = SCNNode(mdlObject: planeAsset.object(at: 0))
-        
-        let planeMaterial = SCNMaterial()
-        planeMaterial.diffuse.contents = color
-        planeNode.geometry?.materials = [planeMaterial]
-        
-        return planeNode
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -199,10 +200,10 @@ extension ViewController: WebSocketDelegate {
             let _ = flight["vvel"]
             
             let airplane = Flight(
-                ICAO: icao,
+                icao: icao,
                 callsign: call,
-                longitude: lat,
-                latitude: lng,
+                longitude: lng,
+                latitude: lat,
                 altitude: alt,
                 heading: hdg)
             
