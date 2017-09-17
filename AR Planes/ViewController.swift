@@ -20,7 +20,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     private let serverPollingInterval = TimeInterval(5)
     
     @IBOutlet var sceneView: ARSCNView!
+    
     var statusCardView: FlightStatusCardView?
+    
     fileprivate let locationManager = CLLocationManager()
     
     var mostRecentUserLocation: CLLocation? {
@@ -134,23 +136,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             statusCardView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         }
         
-        UIView.animate(withDuration: 0.25, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [], animations: {
-            
-            statusCardView.transform = .init(scaleX: 0.2, y: 0.2)
-            statusCardView.alpha = 0.0
-            
-        }, completion: nil)
+        statusCardView.alpha = 1.0
+        statusCardView.transform = .init(scaleX: 0.65, y: 0.65)
+        statusCardView.setLoading(true)
         
         flight.loadAdditionalInformation(handler: { info in
             guard let flightInfo = info else { return }
             
             DispatchQueue.main.sync {
                 statusCardView.update(with: flight, and: flightInfo)
-                
-                UIView.animate(withDuration: 0.5, animations: {
-                    statusCardView.transform = .init(scaleX: 0.65, y: 0.65)
-                    statusCardView.alpha = 1.0
-                })
             }
         })
         
@@ -165,6 +159,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let scene = SCNScene()
         sceneView.scene = scene
         sceneView.antialiasingMode = .multisampling2X
+        sceneView.delegate = self
         
         // Connect to web socket
         socket.onText = self.websocketDidReceiveMessage(text:)
@@ -181,7 +176,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Create a session configuration
 
-        let configuration = ARWorldTrackingConfiguration()
+        let configuration = ARWorldTrackingSessionConfiguration()
         configuration.worldAlignment = .gravityAndHeading
         sceneView.session.run(configuration)
         
@@ -234,6 +229,25 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
     }
+}
+
+// MARK: - ARSCNViewDelegate
+
+extension ViewController /*: ARSCNViewDelegate */ {
+    
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        guard let statusCardView = self.statusCardView,
+            let flight = statusCardView.flight,
+            let node = planeNodes[flight.icao] else
+        {
+            return
+        }
+        
+        let centerPoint = node.position
+        let projectedPoint = renderer.projectPoint(centerPoint)
+        print(projectedPoint)
+    }
+    
 }
 
 // MARK: - CLLocationManagerDelegate

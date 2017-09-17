@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,6 +16,7 @@
                 <outlet property="departureTimeLabel" destination="QLu-Va-7tC" id="qLn-Zn-GVY"/>
                 <outlet property="destinationAirportLabel" destination="Wa5-m5-qbQ" id="Fa7-Cb-BcI"/>
                 <outlet property="distanceLabel" destination="fja-kM-zZe" id="Dp8-fv-iA0"/>
+                <outlet property="loadingCoverView" destination="4EW-HR-sLa" id="q3S-2l-O9a"/>
                 <outlet property="logoImageView" destination="PL2-0u-6Kc" id="9Uz-Hy-jfw"/>
                 <outlet property="originAirportLabel" destination="ohk-Gh-g73" id="wnA-QK-v2t"/>
             </connections>
@@ -47,7 +47,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="20km away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fja-kM-zZe">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="20km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fja-kM-zZe">
                                             <rect key="frame" x="52" y="0.0" width="130.5" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -123,6 +123,19 @@
                         <constraint firstItem="NAw-Bw-Uvv" firstAttribute="centerY" secondItem="5dp-6r-uKB" secondAttribute="centerY" id="FQl-2q-awP"/>
                     </constraints>
                 </view>
+                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4EW-HR-sLa">
+                    <rect key="frame" x="0.0" y="0.0" width="400" height="150"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="2fy-wr-mSs">
+                            <rect key="frame" x="190" y="65" width="20" height="20"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="2fy-wr-mSs" firstAttribute="centerX" secondItem="4EW-HR-sLa" secondAttribute="centerX" id="Oph-Hx-Ldc"/>
+                        <constraint firstItem="2fy-wr-mSs" firstAttribute="centerY" secondItem="4EW-HR-sLa" secondAttribute="centerY" id="W3F-XG-dai"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -130,7 +143,11 @@
                 <constraint firstAttribute="bottom" secondItem="5dp-6r-uKB" secondAttribute="bottom" constant="20" id="3Ch-qB-Cbd"/>
                 <constraint firstItem="5dp-6r-uKB" firstAttribute="leading" secondItem="PL2-0u-6Kc" secondAttribute="trailing" constant="10" id="C8Z-pA-qpV"/>
                 <constraint firstItem="5dp-6r-uKB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="ISv-cc-vkR"/>
+                <constraint firstAttribute="trailing" secondItem="4EW-HR-sLa" secondAttribute="trailing" id="IYO-qK-Exp"/>
                 <constraint firstAttribute="trailing" secondItem="5dp-6r-uKB" secondAttribute="trailing" constant="20" id="Wrm-rO-WTU"/>
+                <constraint firstItem="4EW-HR-sLa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eQs-LK-Ugq"/>
+                <constraint firstAttribute="bottom" secondItem="4EW-HR-sLa" secondAttribute="bottom" id="mk3-nv-EE5"/>
+                <constraint firstItem="4EW-HR-sLa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oxq-Rp-FHZ"/>
                 <constraint firstItem="PL2-0u-6Kc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="t4m-V0-ioo"/>
                 <constraint firstAttribute="bottom" secondItem="PL2-0u-6Kc" secondAttribute="bottom" constant="10" id="yib-mJ-MTk"/>
             </constraints>
