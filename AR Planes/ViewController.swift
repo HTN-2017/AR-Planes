@@ -79,7 +79,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         planeMaterial.diffuse.contents = UIColor.red
         planeNode.geometry?.materials = [planeMaterial]
 
-        let sphere = SCNSphere(radius: 20)
+        let sphere = SCNSphere(radius: 50)
         sphere.firstMaterial?.diffuse.contents = UIColor.clear
         let largerNode = SCNNode(geometry: sphere)
         largerNode.addChildNode(planeNode)
@@ -182,7 +182,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Create a session configuration
 
-        let configuration = ARWorldTrackingSessionConfiguration()
+        let configuration = ARWorldTrackingConfiguration()
         configuration.worldAlignment = .gravityAndHeading
         sceneView.session.run(configuration)
         
