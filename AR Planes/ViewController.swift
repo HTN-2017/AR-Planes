@@ -103,20 +103,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         let location = sender.location(in: sceneView)
-
-
         let hitResults = sceneView.hitTest(location, options: nil)
         if hitResults.count > 0 {
-<<<<<<< HEAD
-            let result = hitResults[0]
-            let node = result.node.childNodes[0]
-            print(node)
-=======
+
             guard let result = hitResults.first,
                 let node = result.node.childNodes.first else {
                     return
             }
->>>>>>> Hack-the-North-2017/master
             
             guard let identifier = planeNodes.allKeys(forValue: node).first else {
                 return
@@ -189,7 +182,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Create a session configuration
 
-        let configuration = ARWorldTrackingSessionConfiguration()
+        let configuration = ARWorldTrackingConfiguration()
         configuration.worldAlignment = .gravityAndHeading
         sceneView.session.run(configuration)
         
