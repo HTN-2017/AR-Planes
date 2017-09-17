@@ -77,16 +77,16 @@ struct Flight {
     // MARK: - Scrape additional info from flightaware.com
     
     struct FlightInformation {
-        let originAirportCode: String
-        let originAirport: String
-        let destinationAirportCode: String
-        let destinationAirport: String
+        let originAirportCode: String?
+        let originAirport: String?
+        let destinationAirportCode: String?
+        let destinationAirport: String?
         
-        let departureTime: String
-        let arrivalTime: String
+        let departureTime: String?
+        let arrivalTime: String?
         
-        let aircraftType: String
-        let airlineName: String
+        let aircraftType: String?
+        let airlineName: String?
         let airlineLogoUrl: String
         
         static let privatePlaneIdentifier = FlightInformation(
@@ -117,74 +117,66 @@ struct Flight {
             
             guard let flights = json?["flights"] as? [String: Any],
                 let firstFlight = flights.keys.first,
-                let masterFlight = flights[firstFlight] as? [String: Any],
-                let activityLog = masterFlight["activityLog"] as? [String: Any],
-                let flightBody = (activityLog["flights"] as? [[String: Any]])?.first else
+                let masterFlight = flights[firstFlight] as? [String: Any] else
             {
                 handler(nil)
                 Flight.cachedFlightInfo[self.icao] = FlightInformation.privatePlaneIdentifier
                 return
             }
             
-            guard let origin = flightBody["origin"] as? [String: Any],
-                let originAirportCode = origin["iata"] as? String,
-                let originAirport = origin["friendlyName"] as? String else
-            {
-                handler(nil)
-                return
-            }
+            let activityLog = masterFlight["activityLog"] as? [String: Any]
+            let flightBody = (activityLog?["flights"] as? [[String: Any]])?.first
             
-            guard let destination = flightBody["destination"] as? [String: Any],
-                let destinationAirportCode = destination["iata"] as? String,
-                let destinationAirport = destination["friendlyName"] as? String else
-            {
-                handler(nil)
-                return
-            }
+            let origin = flightBody?["origin"] as? [String: Any]
+            let originAirportCode = origin?["iata"] as? String
+            let originAirport = origin?["friendlyName"] as? String
             
-            guard let takeoffTimes = flightBody["takeoffTimes"] as? [String: Any],
-                let estimatedTakeoffTimeDouble = takeoffTimes["estimated"] as? Double else
-            {
-                handler(nil)
-                return
-            }
+            let destination = flightBody?["destination"] as? [String: Any]
+            let destinationAirportCode = destination?["iata"] as? String
+            let destinationAirport = destination?["friendlyName"] as? String
             
-            guard let landingTimes = flightBody["landingTimes"] as? [String: Any],
-                let estimatedLandingTimeDouble = landingTimes["estimated"] as? Double else
-            {
-                handler(nil)
-                return
-            }
+            let takeoffTimes = flightBody?["takeoffTimes"] as? [String: Any]
+            let estimatedTakeoffTimeDouble = takeoffTimes?["estimated"] as? Double
             
-            guard let airline = masterFlight["airline"] as? [String: Any],
-                let airlineCode = airline["icao"] as? String,
-                let airlineName = airline["shortName"] as? String else
-            {
-                handler(nil)
-                return
-            }
+            let landingTimes = flightBody?["landingTimes"] as? [String: Any]
+            let estimatedLandingTimeDouble = landingTimes?["estimated"] as? Double
             
-            guard let aircraftType = flightBody["aircraftTypeFriendly"] as? String else {
-                handler(nil)
-                return
-            }
+            let airline = masterFlight["airline"] as? [String: Any]
+            let airlineCode = airline?["icao"] as? String
+            let airlineName = airline?["shortName"] as? String
             
-            let estimatedTakeoffTime = Date(timeIntervalSince1970: estimatedTakeoffTimeDouble)
-            let estimatedLandingTime = Date(timeIntervalSince1970: estimatedLandingTimeDouble)
+            let aircraftType = flightBody?["aircraftTypeFriendly"] as? String
+            
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .none
             dateFormatter.timeStyle = .short
+            
+            let estimatedTakeoffTime: String?
+            if let estimatedTakeoffTimeDouble = estimatedTakeoffTimeDouble {
+                 let estimatedTakeoffDate = Date(timeIntervalSince1970: estimatedTakeoffTimeDouble)
+                estimatedTakeoffTime = dateFormatter.string(from: estimatedTakeoffDate)
+            } else {
+                estimatedTakeoffTime = nil
+            }
+            
+            let estimatedLandingTime: String?
+            if let estimatedLandingTimeDouble = estimatedLandingTimeDouble {
+                let estimatedLandingDate = Date(timeIntervalSince1970: estimatedLandingTimeDouble)
+                estimatedLandingTime = dateFormatter.string(from: estimatedLandingDate)
+            } else {
+                estimatedLandingTime = nil
+            }
             
             let info = FlightInformation.init(
                 originAirportCode: originAirportCode,
                 originAirport: originAirport,
                 destinationAirportCode: destinationAirportCode,
                 destinationAirport: destinationAirport,
-                departureTime: dateFormatter.string(from: estimatedTakeoffTime),
-                arrivalTime: dateFormatter.string(from: estimatedLandingTime),
+                departureTime: estimatedTakeoffTime,
+                arrivalTime: estimatedLandingTime,
                 aircraftType: aircraftType,
                 airlineName: airlineName,
-                airlineLogoUrl: "https://flightaware.com/images/airline_logos/90p/\(airlineCode).png")
+                airlineLogoUrl: "https://flightaware.com/images/airline_logos/90p/\(airlineCode ?? "--").png")
             
             Flight.cachedFlightInfo[self.icao] = info
             handler(info)

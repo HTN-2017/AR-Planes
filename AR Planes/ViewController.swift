@@ -194,9 +194,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let flight = statusCardView.flight,
             let flightInfo = statusCardView.flightInfo
         {
+            guard let origin = flightInfo.originAirport ?? flightInfo.originAirportCode,
+                let destination = flightInfo.destinationAirport ?? flightInfo.destinationAirportCode else
+            {
+                return
+            }
+            
+            var messageString = "from \(origin) to \(destination)"
+            
+            if let aircraftType = flightInfo.aircraftType {
+                messageString += " on a \(aircraftType)."
+            } else {
+                messageString += "."
+            }
+            
             let alert = UIAlertController(
                 title: flight.callsign,
-              message: "from \(flightInfo.originAirport) to \(flightInfo.destinationAirport) on a \(flightInfo.aircraftType).",
+                message: messageString,
                 preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

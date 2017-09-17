@@ -72,12 +72,19 @@ class FlightStatusCardView: UINibView {
         self.flight = flight
         self.flightInfo = info
         
+        guard let originAirportCode = info.originAirportCode,
+            let destinationAirportCode = info.destinationAirportCode else
+        {
+            showOverlay(.privateFlight(callsign: flight.callsign))
+            return
+        }
+        
         //update strings
-        airlineNameLabel?.text = info.airlineName
-        originAirportLabel?.text = info.originAirportCode
-        departureTimeLabel?.text = info.departureTime
-        destinationAirportLabel?.text = info.destinationAirportCode
-        arrivalTimeLabel?.text = info.arrivalTime
+        airlineNameLabel?.text = info.airlineName ?? flight.callsign
+        originAirportLabel?.text = originAirportCode
+        departureTimeLabel?.text = info.departureTime ?? "--"
+        destinationAirportLabel?.text = destinationAirportCode
+        arrivalTimeLabel?.text = info.arrivalTime ?? "--"
         
         let distanceMeters = flight.location.distance(from: userLocation)
         
