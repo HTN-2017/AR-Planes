@@ -185,6 +185,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         setUpLocationManager()
         
         let mockPlane = newPlaneNode()
+        nearbyFlights = [Flight.mock]
+        planeNodes[Flight.mock.icao] = mockPlane
         
         let planeMaterial = SCNMaterial()
         planeMaterial.diffuse.contents = UIColor.green
