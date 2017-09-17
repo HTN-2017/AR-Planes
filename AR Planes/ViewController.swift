@@ -20,6 +20,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     private let serverPollingInterval = TimeInterval(5)
     
     @IBOutlet var sceneView: ARSCNView!
+    var statusCardView: FlightStatusCardView?
     fileprivate let locationManager = CLLocationManager()
     
     var mostRecentUserLocation: CLLocation? {
@@ -38,11 +39,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
             
             for flight in nearbyFlights {
-                
-                flight.loadAdditionalInformation(handler: { info in
-                    print(info)
-                })
-                
                 //update existing node if it exists
                 if let existingNode = planeNodes[flight.icao] {
                     let move = SCNAction.move(
@@ -104,10 +100,60 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if hitResults.count > 0 {
             let result = hitResults[0]
             let node = result.node
-            let identifier = planeNodes.allKeys(forValue: node)[0]
+            guard let identifier = planeNodes.allKeys(forValue: node).first else {
+                return
+            }
+            
             print(identifier)
+            
+            guard let flight = nearbyFlights.first(where: { $0.icao == identifier }) else {
+                return
+            }
+            
+            addInformationView(for: flight, in: node)
         }
     }
+    
+    func addInformationView(for flight: Flight, in node: SCNNode) {
+        let statusCardView: FlightStatusCardView
+        
+        if let existingCardView = self.statusCardView {
+            statusCardView = existingCardView
+        } else {
+            statusCardView = FlightStatusCardView()
+            self.statusCardView = statusCardView
+            self.view.addSubview(statusCardView)
+            
+            statusCardView.widthAnchor.constraint(equalToConstant: statusCardView.intrinsicContentSize.width).isActive = true
+            statusCardView.heightAnchor.constraint(equalToConstant: statusCardView.intrinsicContentSize.height).isActive = true
+            
+            statusCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            statusCardView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        }
+        
+        UIView.animate(withDuration: 0.25, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [], animations: {
+            
+            statusCardView.transform = .init(scaleX: 0.2, y: 0.2)
+            statusCardView.alpha = 0.0
+            
+        }, completion: nil)
+        
+        flight.loadAdditionalInformation(handler: { info in
+            guard let flightInfo = info else { return }
+            
+            DispatchQueue.main.sync {
+                statusCardView.update(with: flight, and: flightInfo)
+                
+                UIView.animate(withDuration: 0.5, animations: {
+                    statusCardView.transform = .init(scaleX: 0.65, y: 0.65)
+                    statusCardView.alpha = 1.0
+                })
+            }
+        })
+        
+    }
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,7 +164,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.antialiasingMode = .multisampling2X
         
         // Connect to web socket
-        socket.delegate = self
+        socket.onText = self.websocketDidReceiveMessage(text:)
+        socket.onConnect = self.websocketDidConnect
+        socket.onDisconnect = self.websocketDidDisconnect
+        socket.onData = self.websocketDidReceiveData(data:)
         socket.connect()
         
         setupTap()
@@ -129,7 +178,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Create a session configuration
 
-        let configuration = ARWorldTrackingConfiguration()
+        let configuration = ARWorldTrackingSessionConfiguration()
         configuration.worldAlignment = .gravityAndHeading
         sceneView.session.run(configuration)
         
@@ -216,9 +265,9 @@ extension ViewController: CLLocationManagerDelegate {
 
 // MARK: - WebSocketDelegate
 
-extension ViewController: WebSocketDelegate {
+extension ViewController {
     
-    func websocketDidConnect(socket: WebSocket) {
+    func websocketDidConnect() {
         sendLocation()
     }
     
@@ -231,11 +280,12 @@ extension ViewController: WebSocketDelegate {
         socket.write(string: "\(location.coordinate.latitude),\(location.coordinate.longitude)")
     }
     
-    func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
+    func websocketDidDisconnect(error: NSError?) {
         print("disconnected")
     }
     
-    func websocketDidReceiveMessage(socket: WebSocket, text: String) {
+    
+    func websocketDidReceiveMessage(text: String) {
         print("RECEIVED DATA")
         
         guard let flightData = text.toJSON() as? [[String: Any]] else {
@@ -262,9 +312,11 @@ extension ViewController: WebSocketDelegate {
             
             return airplane
         }
+        
+        print(nearbyFlights.count)
     }
     
-    func websocketDidReceiveData(socket: WebSocket, data: Data) {
+    func websocketDidReceiveData(data: Data) {
         print("data")
     }
 }
@@ -278,6 +330,6 @@ extension String {
 
 extension Dictionary where Value: Equatable {
     func allKeys(forValue val: Value) -> [Key] {
-        return self.filter { $1 == val }.map { $0.0 }
+        return self.filter { (keyvalue) in keyvalue.value == val }.map { $0.0 }
     }
 }

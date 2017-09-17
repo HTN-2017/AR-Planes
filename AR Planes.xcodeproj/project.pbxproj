@@ -15,6 +15,8 @@
 		2E67409E1F6D018400EEF5CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E67409C1F6D018400EEF5CE /* LaunchScreen.storyboard */; };
 		2E6740A61F6D728200EEF5CE /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6740A51F6D728200EEF5CE /* Flight.swift */; };
 		2E6740B01F6DA20000EEF5CE /* 777.obj in Resources */ = {isa = PBXBuildFile; fileRef = 2E6740AF1F6DA1FF00EEF5CE /* 777.obj */; };
+		2E8518531F6E18A800CBFED7 /* StatusCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E9D5FCA1F6DCA32005CC8F1 /* StatusCard.xib */; };
+		2EF1DB741F6E0669004634E6 /* FlightStatusCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1DB731F6E0669004634E6 /* FlightStatusCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,7 @@
 		2E6740A51F6D728200EEF5CE /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
 		2E6740AF1F6DA1FF00EEF5CE /* 777.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 777.obj; sourceTree = "<group>"; };
 		2E9D5FCA1F6DCA32005CC8F1 /* StatusCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusCard.xib; sourceTree = "<group>"; };
+		2EF1DB731F6E0669004634E6 /* FlightStatusCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightStatusCardView.swift; sourceTree = "<group>"; };
 		A316EF298119193D66BD6418 /* Pods_AR_Planes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AR_Planes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -78,6 +81,7 @@
 				2E6740911F6D018400EEF5CE /* AppDelegate.swift */,
 				2E6740951F6D018400EEF5CE /* ViewController.swift */,
 				2E6740A51F6D728200EEF5CE /* Flight.swift */,
+				2EF1DB731F6E0669004634E6 /* FlightStatusCardView.swift */,
 				2E9D5FCA1F6DCA32005CC8F1 /* StatusCard.xib */,
 				2E67409C1F6D018400EEF5CE /* LaunchScreen.storyboard */,
 				2E6740AF1F6DA1FF00EEF5CE /* 777.obj */,
@@ -158,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E6740B01F6DA20000EEF5CE /* 777.obj in Resources */,
+				2E8518531F6E18A800CBFED7 /* StatusCard.xib in Resources */,
 				2E67409E1F6D018400EEF5CE /* LaunchScreen.storyboard in Resources */,
 				2E67409B1F6D018400EEF5CE /* Assets.xcassets in Resources */,
 				2E6740991F6D018400EEF5CE /* Main.storyboard in Resources */,
@@ -219,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EF1DB741F6E0669004634E6 /* FlightStatusCardView.swift in Sources */,
 				2E6740A61F6D728200EEF5CE /* Flight.swift in Sources */,
 				2E6740961F6D018400EEF5CE /* ViewController.swift in Sources */,
 				2E6740921F6D018400EEF5CE /* AppDelegate.swift in Sources */,
@@ -355,7 +361,7 @@
 			baseConfigurationReference = 251096B6E696B249EB3C1D11 /* Pods-AR Planes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8GEKYYW3CQ;
+				DEVELOPMENT_TEAM = FZ89A5SZ7C;
 				INFOPLIST_FILE = "AR Planes/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hackthenorth.AR-Planes";
@@ -370,7 +376,7 @@
 			baseConfigurationReference = 0606FDA1BCAABFC888806841 /* Pods-AR Planes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8GEKYYW3CQ;
+				DEVELOPMENT_TEAM = FZ89A5SZ7C;
 				INFOPLIST_FILE = "AR Planes/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hackthenorth.AR-Planes";
