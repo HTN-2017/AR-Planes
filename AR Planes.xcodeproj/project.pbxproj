@@ -15,6 +15,7 @@
 		2E67409E1F6D018400EEF5CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E67409C1F6D018400EEF5CE /* LaunchScreen.storyboard */; };
 		2E6740A61F6D728200EEF5CE /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6740A51F6D728200EEF5CE /* Flight.swift */; };
 		2E6740B01F6DA20000EEF5CE /* 777.obj in Resources */ = {isa = PBXBuildFile; fileRef = 2E6740AF1F6DA1FF00EEF5CE /* 777.obj */; };
+		2E96BFDF1F6E3CA0001BCBAA /* server_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E96BFDE1F6E3CA0001BCBAA /* server_stub.json */; };
 		2EE5C8C81F6E2AF800207142 /* StatusCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EE5C8C71F6E2AF800207142 /* StatusCard.xib */; };
 		2EF1DB741F6E0669004634E6 /* FlightStatusCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1DB731F6E0669004634E6 /* FlightStatusCardView.swift */; };
 /* End PBXBuildFile section */
@@ -31,6 +32,7 @@
 		2E67409F1F6D018400EEF5CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E6740A51F6D728200EEF5CE /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
 		2E6740AF1F6DA1FF00EEF5CE /* 777.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 777.obj; sourceTree = "<group>"; };
+		2E96BFDE1F6E3CA0001BCBAA /* server_stub.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = server_stub.json; sourceTree = "<group>"; };
 		2EE5C8C71F6E2AF800207142 /* StatusCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusCard.xib; sourceTree = "<group>"; };
 		2EF1DB731F6E0669004634E6 /* FlightStatusCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightStatusCardView.swift; sourceTree = "<group>"; };
 		A316EF298119193D66BD6418 /* Pods_AR_Planes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AR_Planes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +90,7 @@
 				2E6740971F6D018400EEF5CE /* Main.storyboard */,
 				2E67409A1F6D018400EEF5CE /* Assets.xcassets */,
 				2E67409F1F6D018400EEF5CE /* Info.plist */,
+				2E96BFDE1F6E3CA0001BCBAA /* server_stub.json */,
 			);
 			path = "AR Planes";
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E96BFDF1F6E3CA0001BCBAA /* server_stub.json in Resources */,
 				2E6740B01F6DA20000EEF5CE /* 777.obj in Resources */,
 				2E67409E1F6D018400EEF5CE /* LaunchScreen.storyboard in Resources */,
 				2EE5C8C81F6E2AF800207142 /* StatusCard.xib in Resources */,
