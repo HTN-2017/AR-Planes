@@ -16,7 +16,7 @@ import SceneKit.ModelIO
 
 class ViewController: UIViewController, ARSCNViewDelegate {
     
-    static let USE_JSON_STUB = true
+    static let USE_JSON_STUB = false
     
     let socket = WebSocket(url: URL(string: "ws://34.232.80.41/")!)
     private let serverPollingInterval = TimeInterval(5)
@@ -248,6 +248,13 @@ extension ViewController /*: ARSCNViewDelegate */ {
         
         DispatchQueue.main.async {
             statusCardView.transform = translateAndScale
+            
+            //if z if less than 1, then the point is behind the camera
+            if projectedPoint.z > 1 {
+                statusCardView.alpha = 0.0
+            } else {
+                statusCardView.alpha = 1.0
+            }
         }
     }
     

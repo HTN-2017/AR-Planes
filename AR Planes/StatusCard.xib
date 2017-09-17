@@ -18,6 +18,7 @@
                 <outlet property="destinationAirportLabel" destination="Wa5-m5-qbQ" id="Fa7-Cb-BcI"/>
                 <outlet property="distanceLabel" destination="fja-kM-zZe" id="Dp8-fv-iA0"/>
                 <outlet property="loadingCoverView" destination="4EW-HR-sLa" id="q3S-2l-O9a"/>
+                <outlet property="loadingIndicator" destination="2fy-wr-mSs" id="ISo-01-W56"/>
                 <outlet property="logoImageView" destination="PL2-0u-6Kc" id="9Uz-Hy-jfw"/>
                 <outlet property="originAirportLabel" destination="ohk-Gh-g73" id="wnA-QK-v2t"/>
                 <outlet property="privateFlightCallSignLabel" destination="U5D-wt-Oqj" id="Fll-9g-qgE"/>

@@ -15,6 +15,7 @@ class FlightStatusCardView: UINibView {
     private(set) var flightInfo: Flight.FlightInformation?
     
     @IBOutlet weak var loadingCoverView: UIView!
+    @IBOutlet weak var loadingIndicator: UIView!
     @IBOutlet weak var privateFlightCoverView: UIView!
     @IBOutlet weak var privateFlightCallSignLabel: UILabel!
     
@@ -126,6 +127,7 @@ class FlightStatusCardView: UINibView {
         case .loading:
             self.loadingCoverView.alpha = 1.0
             self.privateFlightCoverView.alpha = 0.0
+            self.loadingIndicator.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         case .privateFlight(let callsign):
             self.loadingCoverView.alpha = 0.0
             self.privateFlightCoverView.alpha = 1.0
