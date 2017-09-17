@@ -63,7 +63,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    // icao to nodes
     var planeNodes = [String: SCNNode]()
     
     lazy var planeModel: MDLObject = {
@@ -88,10 +87,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         tapRecognizer.numberOfTapsRequired = 1
         tapRecognizer.numberOfTouchesRequired = 1
         tapRecognizer.addTarget(self, action: #selector(handleTap(_:)))
-
-            sceneView.gestureRecognizers = [tapRecognizer]
+        sceneView.gestureRecognizers = [tapRecognizer]
     }
 
+    // @objc & #selector should be cleaner
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         let location = sender.location(in: sceneView)
 
@@ -100,6 +99,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let result = hitResults[0]
             let node = result.node
             let identifier = planeNodes.allKeys(forValue: node)[0]
+            print(identifier)
         }
     }
     
