@@ -9,11 +9,12 @@
 import Foundation
 import CoreLocation
 import SceneKit
+import Kanna
 
 struct Flight {
     
     //{"call":"DAL137  ","lat":44.4364,"lng":-80.4109,"alt":10888.98,"hdg":216.01,"gvel":253.75,"vvel":-5.2}]
-    static let mock = Flight(icao: "--", callsign: "DAL137", longitude: -80.4109, latitude: 44.4364, altitude: 10888.98, heading: 180)
+    static let mock = Flight(icao: "--", callsign: "DAL432", longitude: -80.4109, latitude: 44.4364, altitude: 10888.98, heading: 180)
     
     // MARK: - Properties
     
@@ -66,7 +67,7 @@ struct Flight {
          heading: Double)
     {
         self.icao = icao
-        self.callsign = callsign
+        self.callsign = callsign.trimmingCharacters(in: .whitespacesAndNewlines)
         self.longitude = longitude
         self.latitude = latitude
         self.altitude = altitude
@@ -74,6 +75,137 @@ struct Flight {
     }
     
     // MARK: - Scrape additional info from flightaware.com
+    
+    struct FlightInformation {
+        let originAirportCode: String
+        let originAirport: String
+        let destinationAirportCode: String
+        let destinationAirport: String
+        
+        let departureTime: String
+        let arrivalTime: String
+        
+        let aircraftType: String
+        let airlineName: String
+        let airlineLogoUrl: String
+    }
+    
+    func loadAdditionalInformation(handler: @escaping (FlightInformation?) -> Void) {
+        loadJsonFromFlightAware(handler: { json in
+            
+            guard let flights = json?["flights"] as? [String: Any],
+                let firstFlight = flights.keys.first,
+                let masterFlight = flights[firstFlight] as? [String: Any],
+                let activityLog = masterFlight["activityLog"] as? [String: Any],
+                let flightBody = (activityLog["flights"] as? [[String: Any]])?.first else
+            {
+                handler(nil)
+                return
+            }
+            
+            guard let origin = flightBody["origin"] as? [String: Any],
+                let originAirportCode = origin["iata"] as? String,
+                let originAirport = origin["friendlyName"] as? String else
+            {
+                handler(nil)
+                return
+            }
+            
+            guard let destination = flightBody["destination"] as? [String: Any],
+                let destinationAirportCode = destination["iata"] as? String,
+                let destinationAirport = destination["friendlyName"] as? String else
+            {
+                handler(nil)
+                return
+            }
+            
+            guard let takeoffTimes = flightBody["takeoffTimes"] as? [String: Any],
+                let estimatedTakeoffTimeDouble = takeoffTimes["estimated"] as? Double else
+            {
+                handler(nil)
+                return
+            }
+            
+            guard let landingTimes = flightBody["landingTimes"] as? [String: Any],
+                let estimatedLandingTimeDouble = landingTimes["estimated"] as? Double else
+            {
+                handler(nil)
+                return
+            }
+            
+            guard let airline = masterFlight["airline"] as? [String: Any],
+                let airlineCode = airline["icao"] as? String,
+                let airlineName = airline["shortName"] as? String else
+            {
+                handler(nil)
+                return
+            }
+            
+            guard let aircraftType = flightBody["aircraftTypeFriendly"] as? String else {
+                handler(nil)
+                return
+            }
+            
+            let estimatedTakeoffTime = Date(timeIntervalSince1970: estimatedTakeoffTimeDouble)
+            let estimatedLandingTime = Date(timeIntervalSince1970: estimatedLandingTimeDouble)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .none
+            dateFormatter.timeStyle = .short
+            
+            let info = FlightInformation.init(
+                originAirportCode: originAirportCode,
+                originAirport: originAirport,
+                destinationAirportCode: destinationAirportCode,
+                destinationAirport: destinationAirport,
+                departureTime: dateFormatter.string(from: estimatedTakeoffTime),
+                arrivalTime: dateFormatter.string(from: estimatedLandingTime),
+                aircraftType: aircraftType,
+                airlineName: airlineName,
+                airlineLogoUrl: "https://flightaware.com/images/airline_logos/90p/\(airlineCode).png")
+            
+            handler(info)
+        })
+    }
+    
+    private var additionalInfoUrl: URL {
+        return URL(string: "https://flightaware.com/live/flight/\(callsign)")!
+    }
+    
+    private func loadJsonFromFlightAware(handler: @escaping ([String: Any]?) -> Void) {
+        let task = URLSession.shared.dataTask(with: additionalInfoUrl) { (data, _, _) in
+            guard let data = data else {
+                handler(nil)
+                return
+            }
+            
+            guard let html = Kanna.HTML(html: data, encoding: .utf8) else {
+                return
+            }
+            
+            let scripts = html.css("script")
+            for script in scripts {
+                //the json we want is a variable `rosettaBootstrap` inside a script
+                guard let scriptText = script.innerHTML,
+                    scriptText.hasPrefix("var trackpollBootstrap = ") else
+                {
+                    continue
+                }
+                
+                let jsonText = scriptText
+                    .replacingOccurrences(of: "var trackpollBootstrap = ", with: "")
+                    .replacingOccurrences(of: ";", with: "")
+                
+                guard let json = try? JSONSerialization.jsonObject(with: jsonText.data(using: .utf8)!, options: []) as? [String: Any] else {
+                    handler(nil)
+                    return
+                }
+                
+                handler(json)
+            }
+        }
+        
+        task.resume()
+    }
     
 }
 

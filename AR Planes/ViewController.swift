@@ -24,6 +24,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var mostRecentUserLocation: CLLocation? {
         didSet {
+            print("LOADED USER LOCATION")
             sendLocation()
         }
     }
@@ -37,6 +38,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
             
             for flight in nearbyFlights {
+                
+                flight.loadAdditionalInformation(handler: { info in
+                    print(info)
+                })
+                
                 //update existing node if it exists
                 if let existingNode = planeNodes[flight.icao] {
                     let move = SCNAction.move(
@@ -221,6 +227,7 @@ extension ViewController: WebSocketDelegate {
             return
         }
         
+        print("sent location")
         socket.write(string: "\(location.coordinate.latitude),\(location.coordinate.longitude)")
     }
     
@@ -229,6 +236,8 @@ extension ViewController: WebSocketDelegate {
     }
     
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
+        print("RECEIVED DATA")
+        
         guard let flightData = text.toJSON() as? [[String: Any]] else {
             return
         }
