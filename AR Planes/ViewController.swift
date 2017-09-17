@@ -97,7 +97,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.gestureRecognizers = [tapRecognizer]
     }
 
-    // @objc & #selector should be cleaner
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         let location = sender.location(in: sceneView)
 
