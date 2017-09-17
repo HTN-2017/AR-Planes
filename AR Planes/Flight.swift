@@ -89,9 +89,31 @@ struct Flight {
         let aircraftType: String
         let airlineName: String
         let airlineLogoUrl: String
+        
+        static let privatePlaneIdentifier = FlightInformation(
+            originAirportCode: "private",
+            originAirport: "private",
+            destinationAirportCode: "private",
+            destinationAirport: "private",
+            departureTime: "private",
+            arrivalTime: "private",
+            aircraftType: "private",
+            airlineName: "private",
+            airlineLogoUrl: "private")
+        
+        var isPrivatePlane: Bool {
+            return originAirportCode == "private" && destinationAirportCode == "private"
+        }
     }
     
+    static var cachedFlightInfo = [String: FlightInformation]() //[ICAO: FlightInformation]
+    
     func loadAdditionalInformation(handler: @escaping (FlightInformation?) -> Void) {
+        if let cachedFlightInfo = Flight.cachedFlightInfo[icao] {
+            handler(cachedFlightInfo.isPrivatePlane ? nil : cachedFlightInfo)
+            return
+        }
+        
         loadJsonFromFlightAware(handler: { json in
             
             guard let flights = json?["flights"] as? [String: Any],
@@ -101,6 +123,7 @@ struct Flight {
                 let flightBody = (activityLog["flights"] as? [[String: Any]])?.first else
             {
                 handler(nil)
+                Flight.cachedFlightInfo[self.icao] = FlightInformation.privatePlaneIdentifier
                 return
             }
             
@@ -164,6 +187,7 @@ struct Flight {
                 airlineName: airlineName,
                 airlineLogoUrl: "https://flightaware.com/images/airline_logos/90p/\(airlineCode).png")
             
+            Flight.cachedFlightInfo[self.icao] = info
             handler(info)
         })
     }
