@@ -10,11 +10,12 @@ import UIKit
 
 class FlightStatusCardView: UINibView {
     
-    private var flight: Flight?
-    private var flightInfo: Flight.FlightInformation?
+    private(set) var flight: Flight?
+    private(set) var flightInfo: Flight.FlightInformation?
+    
+    @IBOutlet weak var loadingCoverView: UIView!
     
     @IBOutlet weak var logoImageView: UIImageView!
-    
     @IBOutlet weak var airlineNameLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     
@@ -46,6 +47,10 @@ class FlightStatusCardView: UINibView {
         return CGSize(width: 400, height: 150)
     }
     
+    func setLoading(_ loading: Bool) {
+        loadingCoverView.alpha = loading ? 1.0 : 0.0
+    }
+    
     func update(with flight: Flight, and info: Flight.FlightInformation) {
         self.flight = flight
         self.flightInfo = info
@@ -65,6 +70,7 @@ class FlightStatusCardView: UINibView {
                 
                 DispatchQueue.main.sync {
                     logoImageView.image = nil
+                    self.setLoading(false)
                 }
                 
                 return
@@ -72,6 +78,7 @@ class FlightStatusCardView: UINibView {
             
             DispatchQueue.main.sync {
                 logoImageView.image = image
+                self.setLoading(false)
             }
         })
         

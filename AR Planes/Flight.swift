@@ -23,7 +23,7 @@ struct Flight {
     let longitude: Double
     let latitude: Double
     let altitude: Double
-    let heading: Double
+    let noseHeading: Double
     
     var location: CLLocation {
         let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -40,8 +40,9 @@ struct Flight {
     func sceneKitCoordinate(relativeTo userLocation: CLLocation) -> SCNVector3 {
         let distance = location.distance(from: userLocation)
         let heading = userLocation.coordinate.getHeading(toPoint: location.coordinate)
-        let headingRadians = heading * (.pi/180) - (.pi/2) //add pi/2 to offset for .obj orientation (presumably)
+        let headingRadians = heading * (.pi/180) //add pi/2 to offset for .obj orientation (presumably)
         
+        print("\(callsign) -> \(heading))")
         let distanceScale: Double = 1/140
         let eastWestOffset = distance * sin(headingRadians) * distanceScale
         let northSouthOffset = distance * cos(headingRadians)  * distanceScale
@@ -54,7 +55,7 @@ struct Flight {
     }
     
     func sceneKitRotation() -> SCNVector4 {
-        return SCNVector4(0, 1, 0, heading)
+        return SCNVector4(0, 1, 0, noseHeading * (.pi/180) - (.pi/2))
     }
     
     // MARK: - Initializers
@@ -71,7 +72,7 @@ struct Flight {
         self.longitude = longitude
         self.latitude = latitude
         self.altitude = altitude
-        self.heading = heading
+        self.noseHeading = heading
     }
     
     // MARK: - Scrape additional info from flightaware.com

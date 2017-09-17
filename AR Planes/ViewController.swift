@@ -15,12 +15,16 @@ import ModelIO
 import SceneKit.ModelIO
 
 class ViewController: UIViewController, ARSCNViewDelegate {
-
+    
+    static let USE_JSON_STUB = true
+    
     let socket = WebSocket(url: URL(string: "ws://34.232.80.41/")!)
     private let serverPollingInterval = TimeInterval(5)
     
     @IBOutlet var sceneView: ARSCNView!
+    
     var statusCardView: FlightStatusCardView?
+    
     fileprivate let locationManager = CLLocationManager()
     
     var mostRecentUserLocation: CLLocation? {
@@ -103,9 +107,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         let hitResults = sceneView.hitTest(location, options: nil)
         if hitResults.count > 0 {
+<<<<<<< HEAD
             let result = hitResults[0]
             let node = result.node.childNodes[0]
             print(node)
+=======
+            guard let result = hitResults.first,
+                let node = result.node.childNodes.first else {
+                    return
+            }
+>>>>>>> Hack-the-North-2017/master
             
             guard let identifier = planeNodes.allKeys(forValue: node).first else {
                 return
@@ -136,23 +147,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             statusCardView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         }
         
-        UIView.animate(withDuration: 0.25, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [], animations: {
-            
-            statusCardView.transform = .init(scaleX: 0.2, y: 0.2)
-            statusCardView.alpha = 0.0
-            
-        }, completion: nil)
+        statusCardView.alpha = 1.0
+        statusCardView.transform = .init(scaleX: 0.65, y: 0.65)
+        statusCardView.setLoading(true)
         
         flight.loadAdditionalInformation(handler: { info in
             guard let flightInfo = info else { return }
             
             DispatchQueue.main.sync {
                 statusCardView.update(with: flight, and: flightInfo)
-                
-                UIView.animate(withDuration: 0.5, animations: {
-                    statusCardView.transform = .init(scaleX: 0.65, y: 0.65)
-                    statusCardView.alpha = 1.0
-                })
             }
         })
         
@@ -167,13 +170,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let scene = SCNScene()
         sceneView.scene = scene
         sceneView.antialiasingMode = .multisampling2X
+        sceneView.delegate = self
         
         // Connect to web socket
-        socket.onText = self.websocketDidReceiveMessage(text:)
-        socket.onConnect = self.websocketDidConnect
-        socket.onDisconnect = self.websocketDidDisconnect
-        socket.onData = self.websocketDidReceiveData(data:)
-        socket.connect()
+        if !ViewController.USE_JSON_STUB {
+            socket.onText = self.websocketDidReceiveMessage(text:)
+            socket.onConnect = self.websocketDidConnect
+            socket.onDisconnect = self.websocketDidDisconnect
+            socket.onData = self.websocketDidReceiveData(data:)
+            socket.connect()
+        }
         
         setupTap()
     }
@@ -183,13 +189,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Create a session configuration
 
-        let configuration = ARWorldTrackingConfiguration()
+        let configuration = ARWorldTrackingSessionConfiguration()
         configuration.worldAlignment = .gravityAndHeading
         sceneView.session.run(configuration)
         
         setUpLocationManager()
         
         let mockPlane = newPlaneNode()
+        nearbyFlights = [Flight.mock]
+        planeNodes[Flight.mock.icao] = mockPlane
         
         let planeMaterial = SCNMaterial()
         planeMaterial.diffuse.contents = UIColor.green
@@ -202,38 +210,27 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        // Pause the view's session
         sceneView.session.pause()
     }
+}
+
+// MARK: - ARSCNViewDelegate
+
+extension ViewController /*: ARSCNViewDelegate */ {
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        guard let statusCardView = self.statusCardView,
+            let flight = statusCardView.flight,
+            let node = planeNodes[flight.icao] else
+        {
+            return
+        }
+        
+        let centerPoint = node.position
+        let projectedPoint = renderer.projectPoint(centerPoint)
+        print(projectedPoint)
     }
     
-    // MARK: - ARSCNViewDelegate
-    
-    /*
-     // Override to create and configure nodes for anchors added to the view's session.
-     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-     let node = SCNNode()
-     
-     return node
-     }
-     */
-    
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
-    }
-    
-    func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
-    }
 }
 
 // MARK: - CLLocationManagerDelegate
@@ -241,27 +238,26 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 extension ViewController: CLLocationManagerDelegate {
     
     func setUpLocationManager() {
-        // Initialize
         locationManager.delegate = self
-        
-        // Highest accuracy
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
-        // Request location when app is in use
         locationManager.requestWhenInUseAuthorization()
         
-        // Update location if authorized
         if CLLocationManager.locationServicesEnabled() {
             locationManager.startUpdatingLocation()
         }
     }
     
-    // Called every time location changes
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         mostRecentUserLocation = locations[0] as CLLocation
+        
+        if ViewController.USE_JSON_STUB,
+            let jsonStub = Bundle.main.url(forResource: "server_stub", withExtension: "json"),
+            let jsonText = try? String(contentsOf: jsonStub)
+        {
+            processJsonText(text: jsonText)
+        }
     }
     
-    // Called if location manager fails to update
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
     {
         print("\(error)")
@@ -292,7 +288,10 @@ extension ViewController {
     
     func websocketDidReceiveMessage(text: String) {
         print("RECEIVED DATA")
-        
+        processJsonText(text: text)
+    }
+    
+    func processJsonText(text: String) {
         guard let flightData = text.toJSON() as? [[String: Any]] else {
             return
         }
@@ -317,8 +316,6 @@ extension ViewController {
             
             return airplane
         }
-        
-        print(nearbyFlights.count)
     }
     
     func websocketDidReceiveData(data: Data) {
