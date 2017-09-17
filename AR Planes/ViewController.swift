@@ -139,7 +139,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         mockPlane.rotation = Flight.mock.sceneKitRotation()
         sceneView.scene.rootNode.addChildNode(mockPlane)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
