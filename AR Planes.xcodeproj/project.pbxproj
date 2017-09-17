@@ -355,7 +355,7 @@
 			baseConfigurationReference = 251096B6E696B249EB3C1D11 /* Pods-AR Planes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = FZ89A5SZ7C;
+				DEVELOPMENT_TEAM = 8GEKYYW3CQ;
 				INFOPLIST_FILE = "AR Planes/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hackthenorth.AR-Planes";
@@ -370,7 +370,7 @@
 			baseConfigurationReference = 0606FDA1BCAABFC888806841 /* Pods-AR Planes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = FZ89A5SZ7C;
+				DEVELOPMENT_TEAM = 8GEKYYW3CQ;
 				INFOPLIST_FILE = "AR Planes/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hackthenorth.AR-Planes";
