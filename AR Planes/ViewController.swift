@@ -76,7 +76,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let planeNode = SCNNode(mdlObject: planeModel)
         
         let planeMaterial = SCNMaterial()
-        planeMaterial.diffuse.contents = UIColor.red
+        planeMaterial.diffuse.contents = UIColor(red:0.88, green:0.88, blue:0.88, alpha:1.0)
+        planeMaterial.reflective.contents = #imageLiteral(resourceName: "night")
         planeNode.geometry?.materials = [planeMaterial]
 
         let cylinder = SCNCylinder(radius: 30, height: 20)
