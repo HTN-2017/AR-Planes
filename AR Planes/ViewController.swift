@@ -63,6 +63,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
+    // icao to nodes
     var planeNodes = [String: SCNNode]()
     
     lazy var planeModel: MDLObject = {
@@ -82,24 +83,25 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     // MARK: - User interaction
     
-//    func setupTap() {
-//        let tapRecognizer = UITapGestureRecognizer()
-//            tapRecognizer.numberOfTapsRequired = 1
-//            tapRecognizer.numberOfTouchesRequired = 1
-//            tapRecognizer.addTarget(self, action: Selector(("sceneTapped:")))
-//            sceneView.gestureRecognizers = [tapRecognizer]
-//    }
-//
-//    func sceneTapped(recognizer: UITapGestureRecognizer) {
-//        let location = recognizer.location(in: sceneView)
-//
-//        let hitResults = sceneView.hitTest(location, options: nil)
-//        if hitResults.count > 0 {
-//            let result = hitResults[0]
-//            let node = result.node
-//            print(node)
-//        }
-//    }
+    func setupTap() {
+        let tapRecognizer = UITapGestureRecognizer()
+        tapRecognizer.numberOfTapsRequired = 1
+        tapRecognizer.numberOfTouchesRequired = 1
+        tapRecognizer.addTarget(self, action: #selector(handleTap(_:)))
+
+            sceneView.gestureRecognizers = [tapRecognizer]
+    }
+
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        let location = sender.location(in: sceneView)
+
+        let hitResults = sceneView.hitTest(location, options: nil)
+        if hitResults.count > 0 {
+            let result = hitResults[0]
+            let node = result.node
+            let identifier = planeNodes.allKeys(forValue: node)[0]
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,7 +115,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         socket.delegate = self
         socket.connect()
         
-//        setupTap()
+        setupTap()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -262,5 +264,11 @@ extension String {
     func toJSON() -> Any? {
         guard let data = self.data(using: .utf8, allowLossyConversion: false) else { return nil }
         return try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+    }
+}
+
+extension Dictionary where Value: Equatable {
+    func allKeys(forValue val: Value) -> [Key] {
+        return self.filter { $1 == val }.map { $0.0 }
     }
 }
