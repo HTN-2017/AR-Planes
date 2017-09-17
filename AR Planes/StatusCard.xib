@@ -9,7 +9,17 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FlightStatusCardView" customModule="AR_Planes">
+            <connections>
+                <outlet property="airlineNameLabel" destination="LEo-41-Np1" id="TXG-tO-t9v"/>
+                <outlet property="arrivalTimeLabel" destination="YTO-va-MNd" id="0Qq-Fq-tYc"/>
+                <outlet property="departureTimeLabel" destination="b8m-IU-L0G" id="PHe-Dm-ISL"/>
+                <outlet property="destinationAirportLabel" destination="SSA-tb-Jan" id="jAq-ZR-ZYu"/>
+                <outlet property="distanceLabel" destination="3zf-bU-Fwp" id="TNu-LR-Byg"/>
+                <outlet property="logoImageView" destination="PL2-0u-6Kc" id="aK5-UE-qUf"/>
+                <outlet property="originAirportLabel" destination="pzU-2Q-7ln" id="pbX-iE-icu"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
