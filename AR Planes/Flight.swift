@@ -99,5 +99,4 @@ extension CLLocationCoordinate2D {
         
         return radiansToDegrees(radiansBearing)
     }
-    
 }
