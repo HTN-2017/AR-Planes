@@ -84,7 +84,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let largerNode = SCNNode(geometry: sphere)
         largerNode.addChildNode(planeNode)
         
-        return planeNode
+        return largerNode
     }
     
     // MARK: - User interaction
@@ -105,6 +105,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if hitResults.count > 0 {
             let result = hitResults[0]
             let node = result.node.childNodes[0]
+            print(node)
             
             guard let identifier = planeNodes.allKeys(forValue: node).first else {
                 return
