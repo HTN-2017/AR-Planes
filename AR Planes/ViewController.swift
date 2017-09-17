@@ -361,7 +361,7 @@ extension ViewController {
             
             return airplane
         }.filter { flight in
-            return !flight.callsign.isEmpty
+            return (!flight.callsign.isEmpty) && !(flight.callsign == "CGIQC")
         }
     }
     
