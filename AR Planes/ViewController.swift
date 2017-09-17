@@ -104,7 +104,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let hitResults = sceneView.hitTest(location, options: nil)
         if hitResults.count > 0 {
             let result = hitResults[0]
-            let node = result.node
+            let node = result.node.childNodes[0]
+            
             guard let identifier = planeNodes.allKeys(forValue: node).first else {
                 return
             }
