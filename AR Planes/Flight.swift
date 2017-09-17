@@ -40,9 +40,8 @@ struct Flight {
     func sceneKitCoordinate(relativeTo userLocation: CLLocation) -> SCNVector3 {
         let distance = location.distance(from: userLocation)
         let heading = userLocation.coordinate.getHeading(toPoint: location.coordinate)
-        let headingRadians = heading * (.pi/180) //add pi/2 to offset for .obj orientation (presumably)
+        let headingRadians = heading * (.pi/180)
         
-        print("\(callsign) -> \(heading))")
         let distanceScale: Double = 1/140
         let eastWestOffset = distance * sin(headingRadians) * distanceScale
         let northSouthOffset = distance * cos(headingRadians)  * distanceScale

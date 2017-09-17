@@ -119,6 +119,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if let existingCardView = self.statusCardView {
             statusCardView = existingCardView
         } else {
+            //build the status card
             statusCardView = FlightStatusCardView()
             self.statusCardView = statusCardView
             self.view.addSubview(statusCardView)
@@ -128,6 +129,34 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             
             statusCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             statusCardView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            
+            //add arrow to plane
+            let arrowPath = UIBezierPath()
+            let cardBounds = CGRect.init(origin: .zero, size: statusCardView.intrinsicContentSize)
+            
+            arrowPath.move(to: CGPoint(
+                x: cardBounds.midX,
+                y: cardBounds.minY))
+            
+            arrowPath.addLine(to: CGPoint(
+                x: cardBounds.midX,
+                y: cardBounds.minY - cardBounds.height * 0.05))
+            
+            arrowPath.addLine(to: CGPoint(
+                x: cardBounds.midX - cardBounds.width * 0.025,
+                y: cardBounds.minY - cardBounds.height * 0.15))
+            
+            let arrowLayer = CAShapeLayer()
+            arrowLayer.path = arrowPath.cgPath
+            arrowLayer.lineCap = kCALineCapRound
+            arrowLayer.lineJoin = kCALineJoinRound
+            arrowLayer.strokeColor = UIColor(white: 1.0, alpha: 1.0).cgColor
+            arrowLayer.fillColor = nil
+            arrowLayer.lineWidth = 4
+            
+            statusCardView.layer.addSublayer(arrowLayer)
+            statusCardView.layer.masksToBounds = false
+            statusCardView.clipsToBounds = false
         }
         
         statusCardView.alpha = 1.0
@@ -166,7 +195,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.scene = scene
         sceneView.antialiasingMode = .multisampling2X
         sceneView.delegate = self
-        sceneView.showsStatistics = true
         
         // Connect to web socket
         if !ViewController.USE_JSON_STUB {
@@ -184,7 +212,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillAppear(animated)
         
         // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
+        let configuration = ARWorldTrackingSessionConfiguration()
         configuration.worldAlignment = .gravityAndHeading
         sceneView.session.run(configuration)
         setUpLocationManager()
@@ -212,8 +240,8 @@ extension ViewController /*: ARSCNViewDelegate */ {
         let projectedPoint = renderer.projectPoint(centerPoint)
         
         let translate = CGAffineTransform(
-            translationX: CGFloat(projectedPoint.x) - statusCardView.intrinsicContentSize.width/2,
-            y: CGFloat(projectedPoint.y))
+            translationX: CGFloat(projectedPoint.x) - statusCardView.intrinsicContentSize.width/2.2,
+            y: CGFloat(projectedPoint.y) - 14)
         
         let translateAndScale = translate.scaledBy(x: 0.65, y: 0.65)
         

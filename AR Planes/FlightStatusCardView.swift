@@ -40,8 +40,8 @@ class FlightStatusCardView: UINibView {
         widthAnchor.constraint(equalToConstant: intrinsicContentSize.width).isActive = true
         heightAnchor.constraint(equalToConstant: intrinsicContentSize.height).isActive = true
         
-        layer.cornerRadius = 10.0
-        layer.masksToBounds = true
+        nibView.layer.cornerRadius = 10.0
+        nibView.layer.masksToBounds = true
     }
     
     override var intrinsicContentSize: CGSize {
@@ -77,6 +77,14 @@ class FlightStatusCardView: UINibView {
         departureTimeLabel?.text = info.departureTime
         destinationAirportLabel?.text = info.destinationAirportCode
         arrivalTimeLabel?.text = info.arrivalTime
+        
+        let distanceMeters = flight.location.distance(from: userLocation)
+        
+        if distanceMeters < 1000.0 {
+            distanceLabel.text = "\(Int(round(distanceMeters)))m"
+        } else {
+            distanceLabel.text = "\(Int(round(distanceMeters / 1000.0)))km"
+        }
         
         //load image from URL
         guard let logoImageView = self.logoImageView else { return }
