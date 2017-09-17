@@ -186,6 +186,24 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        super.motionEnded(motion, with: event)
+        
+        if motion == .motionShake,
+            let statusCardView = self.statusCardView,
+            let flight = statusCardView.flight,
+            let flightInfo = statusCardView.flightInfo
+        {
+            let alert = UIAlertController(
+                title: flight.callsign,
+              message: "from \(flightInfo.originAirport) to \(flightInfo.destinationAirport) on a \(flightInfo.aircraftType).",
+                preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
