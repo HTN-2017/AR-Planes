@@ -82,6 +82,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let planeMaterial = SCNMaterial()
         planeMaterial.diffuse.contents = UIColor.red
         planeNode.geometry?.materials = [planeMaterial]
+
+        let sphere = SCNSphere(radius: 20)
+        sphere.firstMaterial?.diffuse.contents = UIColor.clear
+        let largerNode = SCNNode(geometry: sphere)
+        largerNode.addChildNode(planeNode)
         
         return planeNode
     }
@@ -100,10 +105,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         let location = sender.location(in: sceneView)
 
+
         let hitResults = sceneView.hitTest(location, options: nil)
         if hitResults.count > 0 {
             let result = hitResults[0]
-            let node = result.node
+            let node = result.node.childNodes[0]
             let identifier = planeNodes.allKeys(forValue: node)[0]
             print(identifier)
         }
