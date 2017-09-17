@@ -54,7 +54,7 @@ struct Flight {
     }
     
     func sceneKitRotation() -> SCNVector4 {
-        return SCNVector4(0, 1, 0, noseHeading * (.pi/180))
+        return SCNVector4(0, 1, 0, .pi - ((noseHeading * (.pi/180)) - .pi))
     }
     
     // MARK: - Initializers

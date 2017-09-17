@@ -76,7 +76,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let planeNode = SCNNode(mdlObject: planeModel)
         
         let planeMaterial = SCNMaterial()
-        planeMaterial.diffuse.contents = UIColor(red:0.88, green:0.88, blue:0.88, alpha:1.0)
+        planeMaterial.diffuse.contents = UIColor(white:0.88, alpha:1.0)
         planeMaterial.reflective.contents = #imageLiteral(resourceName: "night")
         planeNode.geometry?.materials = [planeMaterial]
 
@@ -360,6 +360,8 @@ extension ViewController {
                 heading: hdg)
             
             return airplane
+        }.filter { flight in
+            return !flight.callsign.isEmpty
         }
     }
     
