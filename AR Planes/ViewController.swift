@@ -131,7 +131,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
         
         statusCardView.alpha = 1.0
-        //statusCardView.transform = .init(scaleX: 0.65, y: 0.65)
         statusCardView.setLoading(true, flight: flight)
         
         guard !flight.callsign.isEmpty else {
@@ -140,13 +139,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
         
         flight.loadAdditionalInformation(handler: { info in
-            DispatchQueue.main.sync {
-                guard let flightInfo = info else {
+            DispatchQueue.main.async {
+                guard let flightInfo = info,
+                    let userLocation = self.mostRecentUserLocation else
+                {
                     statusCardView.updateForPrivateFlight(flight)
                     return
                 }
 
-                statusCardView.update(with: flight, and: flightInfo)
+                statusCardView.update(
+                    with: flight,
+                    and: flightInfo,
+                    relativeTo: userLocation)
             }
         })
         

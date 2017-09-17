@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class FlightStatusCardView: UINibView {
     
@@ -36,10 +37,6 @@ class FlightStatusCardView: UINibView {
     override func nibWasLoaded() {
         self.translatesAutoresizingMaskIntoConstraints = false
         
-        if let flight = flight, let flightInfo = flightInfo {
-            update(with: flight, and: flightInfo)
-        }
-        
         widthAnchor.constraint(equalToConstant: intrinsicContentSize.width).isActive = true
         heightAnchor.constraint(equalToConstant: intrinsicContentSize.height).isActive = true
         
@@ -66,7 +63,11 @@ class FlightStatusCardView: UINibView {
         showOverlay(.privateFlight(callsign: flight.callsign))
     }
     
-    func update(with flight: Flight, and info: Flight.FlightInformation) {
+    func update(
+        with flight: Flight,
+        and info: Flight.FlightInformation,
+        relativeTo userLocation: CLLocation)
+    {
         self.flight = flight
         self.flightInfo = info
         
@@ -82,7 +83,7 @@ class FlightStatusCardView: UINibView {
         
         let imageTask = URLSession.shared.dataTask(with: URL(string: info.airlineLogoUrl)!, completionHandler: { data, _, _ in
             guard let data = data, let image = UIImage(data: data) else {
-                DispatchQueue.main.sync {
+                DispatchQueue.main.async {
                     logoImageView.image = #imageLiteral(resourceName: "generic airline")
                     self.showOverlay(nil)
                 }
@@ -90,7 +91,7 @@ class FlightStatusCardView: UINibView {
                 return
             }
             
-            DispatchQueue.main.sync {
+            DispatchQueue.main.async {
                 logoImageView.image = image
                 self.showOverlay(nil)
             }
