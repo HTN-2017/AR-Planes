@@ -49,11 +49,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                         to: flight.sceneKitCoordinate(relativeTo: userLocation),
                         duration: serverPollingInterval)
                     
-                    /*let rotate = SCNAction.rotate(
-                        toAxisAngle: flight.sceneKitRotation(),
-                        duration: serverPollingInterval)*/
-                    
-                    existingNode.runAction(.group([move/*, rotate*/]))
+                    existingNode.runAction(move)
                 }
                 
                 //otherwise, make a new node
@@ -83,8 +79,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         planeMaterial.diffuse.contents = UIColor.red
         planeNode.geometry?.materials = [planeMaterial]
 
-        let sphere = SCNSphere(radius: 50)
-        sphere.firstMaterial?.diffuse.contents = UIColor.clear
+        let sphere = SCNSphere(radius: 27)
+        sphere.firstMaterial?.diffuse.contents = UIColor.init(red: 0, green: 0, blue: 1, alpha: 0.0)
         let largerNode = SCNNode(geometry: sphere)
         largerNode.addChildNode(planeNode)
         
@@ -103,23 +99,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         let location = sender.location(in: sceneView)
+        
         let hitResults = sceneView.hitTest(location, options: nil)
         if hitResults.count > 0 {
-
-            guard let result = hitResults.first,
-                let node = result.node.childNodes.first else {
-                    return
-            }
-            
-            guard let identifier = planeNodes.allKeys(forValue: node).first else {
+            guard let planeNode = hitResults.first?.node,
+                let identifier = planeNodes.allKeys(forValue: planeNode).first,
+                let flight = nearbyFlights.first(where: { $0.icao == identifier }) else
+            {
                 return
             }
             
-            guard let flight = nearbyFlights.first(where: { $0.icao == identifier }) else {
-                return
-            }
-            
-            addInformationView(for: flight, in: node)
+            addInformationView(for: flight, in: planeNode)
         }
     }
     
@@ -141,13 +131,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
         
         statusCardView.alpha = 1.0
-        statusCardView.transform = .init(scaleX: 0.65, y: 0.65)
-        statusCardView.setLoading(true)
+        //statusCardView.transform = .init(scaleX: 0.65, y: 0.65)
+        statusCardView.setLoading(true, flight: flight)
+        
+        guard !flight.callsign.isEmpty else {
+            statusCardView.updateForPrivateFlight(flight)
+            return
+        }
         
         flight.loadAdditionalInformation(handler: { info in
-            guard let flightInfo = info else { return }
-            
             DispatchQueue.main.sync {
+                guard let flightInfo = info else {
+                    statusCardView.updateForPrivateFlight(flight)
+                    return
+                }
+
                 statusCardView.update(with: flight, and: flightInfo)
             }
         })
@@ -164,6 +162,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.scene = scene
         sceneView.antialiasingMode = .multisampling2X
         sceneView.delegate = self
+        sceneView.showsStatistics = true
         
         // Connect to web socket
         if !ViewController.USE_JSON_STUB {
@@ -181,24 +180,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillAppear(animated)
         
         // Create a session configuration
-
         let configuration = ARWorldTrackingConfiguration()
         configuration.worldAlignment = .gravityAndHeading
         sceneView.session.run(configuration)
         
         setUpLocationManager()
-        
-        let mockPlane = newPlaneNode()
-        nearbyFlights = [Flight.mock]
-        planeNodes[Flight.mock.icao] = mockPlane
-        
-        let planeMaterial = SCNMaterial()
-        planeMaterial.diffuse.contents = UIColor.green
-        mockPlane.geometry?.materials = [planeMaterial]
-        
-        mockPlane.position = SCNVector3.init(0, 200, 0)
-        mockPlane.rotation = Flight.mock.sceneKitRotation()
-        sceneView.scene.rootNode.addChildNode(mockPlane)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -221,7 +207,16 @@ extension ViewController /*: ARSCNViewDelegate */ {
         
         let centerPoint = node.position
         let projectedPoint = renderer.projectPoint(centerPoint)
-        print(projectedPoint)
+        
+        let translate = CGAffineTransform(
+            translationX: CGFloat(projectedPoint.x) - statusCardView.intrinsicContentSize.width/2,
+            y: CGFloat(projectedPoint.y))
+        
+        let translateAndScale = translate.scaledBy(x: 0.65, y: 0.65)
+        
+        DispatchQueue.main.async {
+            statusCardView.transform = translateAndScale
+        }
     }
     
 }

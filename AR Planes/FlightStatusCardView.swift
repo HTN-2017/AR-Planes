@@ -14,6 +14,8 @@ class FlightStatusCardView: UINibView {
     private(set) var flightInfo: Flight.FlightInformation?
     
     @IBOutlet weak var loadingCoverView: UIView!
+    @IBOutlet weak var privateFlightCoverView: UIView!
+    @IBOutlet weak var privateFlightCallSignLabel: UILabel!
     
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var airlineNameLabel: UILabel!
@@ -24,6 +26,8 @@ class FlightStatusCardView: UINibView {
     
     @IBOutlet weak var destinationAirportLabel: UILabel!
     @IBOutlet weak var arrivalTimeLabel: UILabel!
+    
+    // MARK: - Setup
     
     override var nibName: String {
         return "StatusCard"
@@ -47,8 +51,19 @@ class FlightStatusCardView: UINibView {
         return CGSize(width: 400, height: 150)
     }
     
-    func setLoading(_ loading: Bool) {
-        loadingCoverView.alpha = loading ? 1.0 : 0.0
+    
+    // MARK - Updating
+    
+    func setLoading(_ loading: Bool, flight: Flight) {
+        self.flight = flight
+        self.flightInfo = nil
+        showOverlay(.loading)
+    }
+    
+    func updateForPrivateFlight(_ flight: Flight) {
+        self.flight = flight
+        self.flightInfo = nil
+        showOverlay(.privateFlight(callsign: flight.callsign))
     }
     
     func update(with flight: Flight, and info: Flight.FlightInformation) {
@@ -67,10 +82,9 @@ class FlightStatusCardView: UINibView {
         
         let imageTask = URLSession.shared.dataTask(with: URL(string: info.airlineLogoUrl)!, completionHandler: { data, _, _ in
             guard let data = data, let image = UIImage(data: data) else {
-                
                 DispatchQueue.main.sync {
-                    logoImageView.image = nil
-                    self.setLoading(false)
+                    logoImageView.image = #imageLiteral(resourceName: "generic airline")
+                    self.showOverlay(nil)
                 }
                 
                 return
@@ -78,11 +92,36 @@ class FlightStatusCardView: UINibView {
             
             DispatchQueue.main.sync {
                 logoImageView.image = image
-                self.setLoading(false)
+                self.showOverlay(nil)
             }
         })
         
         imageTask.resume()
+    }
+    
+    // MARK: - Overlay
+    
+    fileprivate enum Overlay {
+        case loading
+        case privateFlight(callsign: String)
+    }
+    
+    fileprivate func showOverlay(_ overlay: Overlay?) {
+        guard let overlay = overlay else {
+            self.loadingCoverView.alpha = 0.0
+            self.privateFlightCoverView.alpha = 0.0
+            return
+        }
+        
+        switch overlay {
+        case .loading:
+            self.loadingCoverView.alpha = 1.0
+            self.privateFlightCoverView.alpha = 0.0
+        case .privateFlight(let callsign):
+            self.loadingCoverView.alpha = 0.0
+            self.privateFlightCoverView.alpha = 1.0
+            self.privateFlightCallSignLabel.text = callsign
+        }
     }
     
 }
