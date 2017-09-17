@@ -78,6 +78,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let planeMaterial = SCNMaterial()
         planeMaterial.diffuse.contents = UIColor.red
         planeNode.geometry?.materials = [planeMaterial]
+
+        let sphere = SCNSphere(radius: 50)
+        sphere.firstMaterial?.diffuse.contents = UIColor.clear
+        let largerNode = SCNNode(geometry: sphere)
+        largerNode.addChildNode(planeNode)
         
         return planeNode
     }
@@ -92,9 +97,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.gestureRecognizers = [tapRecognizer]
     }
 
-    // @objc & #selector should be cleaner
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         let location = sender.location(in: sceneView)
+
 
         let hitResults = sceneView.hitTest(location, options: nil)
         if hitResults.count > 0 {
@@ -103,8 +108,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             guard let identifier = planeNodes.allKeys(forValue: node).first else {
                 return
             }
-            
-            print(identifier)
             
             guard let flight = nearbyFlights.first(where: { $0.icao == identifier }) else {
                 return
@@ -178,7 +181,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Create a session configuration
 
-        let configuration = ARWorldTrackingSessionConfiguration()
+        let configuration = ARWorldTrackingConfiguration()
         configuration.worldAlignment = .gravityAndHeading
         sceneView.session.run(configuration)
         
@@ -196,7 +199,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         mockPlane.rotation = Flight.mock.sceneKitRotation()
         sceneView.scene.rootNode.addChildNode(mockPlane)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
