@@ -80,7 +80,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         planeNode.geometry?.materials = [planeMaterial]
 
         let sphere = SCNSphere(radius: 27)
-        sphere.firstMaterial?.diffuse.contents = UIColor.init(red: 0, green: 0, blue: 1, alpha: 0.4)
+        sphere.firstMaterial?.diffuse.contents = UIColor.init(red: 0, green: 0, blue: 1, alpha: 0.0)
         let largerNode = SCNNode(geometry: sphere)
         largerNode.addChildNode(planeNode)
         
@@ -131,8 +131,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
         
         statusCardView.alpha = 1.0
-        statusCardView.transform = .init(scaleX: 0.65, y: 0.65)
-        statusCardView.setLoading(true)
+        //statusCardView.transform = .init(scaleX: 0.65, y: 0.65)
+        statusCardView.setLoading(true, flight: flight)
         
         guard !flight.callsign.isEmpty else {
             statusCardView.updateForPrivateFlight(flight)
@@ -162,6 +162,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.scene = scene
         sceneView.antialiasingMode = .multisampling2X
         sceneView.delegate = self
+        sceneView.showsStatistics = true
         
         // Connect to web socket
         if !ViewController.USE_JSON_STUB {
@@ -179,24 +180,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillAppear(animated)
         
         // Create a session configuration
-
         let configuration = ARWorldTrackingSessionConfiguration()
         configuration.worldAlignment = .gravityAndHeading
         sceneView.session.run(configuration)
         
         setUpLocationManager()
-        
-        let mockPlane = newPlaneNode()
-        nearbyFlights = [Flight.mock]
-        planeNodes[Flight.mock.icao] = mockPlane
-        
-        let planeMaterial = SCNMaterial()
-        planeMaterial.diffuse.contents = UIColor.green
-        mockPlane.geometry?.materials = [planeMaterial]
-        
-        mockPlane.position = SCNVector3.init(0, 200, 0)
-        mockPlane.rotation = Flight.mock.sceneKitRotation()
-        sceneView.scene.rootNode.addChildNode(mockPlane)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -219,7 +207,16 @@ extension ViewController /*: ARSCNViewDelegate */ {
         
         let centerPoint = node.position
         let projectedPoint = renderer.projectPoint(centerPoint)
-        print(projectedPoint)
+        
+        let translate = CGAffineTransform(
+            translationX: CGFloat(projectedPoint.x) - statusCardView.intrinsicContentSize.width/2,
+            y: CGFloat(projectedPoint.y))
+        
+        let translateAndScale = translate.scaledBy(x: 0.65, y: 0.65)
+        
+        DispatchQueue.main.async {
+            statusCardView.transform = translateAndScale
+        }
     }
     
 }

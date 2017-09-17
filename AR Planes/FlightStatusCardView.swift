@@ -54,11 +54,15 @@ class FlightStatusCardView: UINibView {
     
     // MARK - Updating
     
-    func setLoading(_ loading: Bool) {
+    func setLoading(_ loading: Bool, flight: Flight) {
+        self.flight = flight
+        self.flightInfo = nil
         showOverlay(.loading)
     }
     
     func updateForPrivateFlight(_ flight: Flight) {
+        self.flight = flight
+        self.flightInfo = nil
         showOverlay(.privateFlight(callsign: flight.callsign))
     }
     
