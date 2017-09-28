@@ -13,9 +13,6 @@ import Kanna
 
 struct Flight {
     
-    //{"call":"DAL137  ","lat":44.4364,"lng":-80.4109,"alt":10888.98,"hdg":216.01,"gvel":253.75,"vvel":-5.2}]
-    static let mock = Flight(icao: "--", callsign: "DAL432", longitude: -80.4109, latitude: 44.4364, altitude: 10888.98, heading: 180)
-    
     // MARK: - Properties
     
     let icao: String
@@ -24,6 +21,8 @@ struct Flight {
     let latitude: Double
     let altitude: Double
     let noseHeading: Double
+    let groundVelocity: Double
+    let verticalVelocity: Double
     
     var location: CLLocation {
         let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -64,14 +63,18 @@ struct Flight {
          longitude: Double,
          latitude: Double,
          altitude: Double,
-         heading: Double)
+         heading: Double,
+         groundVelocity: Double,
+         verticalVelocity: Double)
     {
         self.icao = icao
-        self.callsign = callsign.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.callsign = callsign
         self.longitude = longitude
         self.latitude = latitude
         self.altitude = altitude
         self.noseHeading = heading
+        self.groundVelocity = groundVelocity
+        self.verticalVelocity = verticalVelocity
     }
     
     // MARK: - Scrape additional info from flightaware.com

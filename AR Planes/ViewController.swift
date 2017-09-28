@@ -10,31 +10,84 @@ import UIKit
 import SceneKit
 import ARKit
 import CoreLocation
-import Starscream
 import ModelIO
 import SceneKit.ModelIO
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController {
     
-    static let USE_JSON_STUB = false
-    
-    let socket = WebSocket(url: URL(string: "ws://34.232.80.41/")!)
-    private let serverPollingInterval = TimeInterval(5)
+    static let NETWORK_STUB: Stub? = .atlanta
     
     @IBOutlet var sceneView: ARSCNView!
-    
     var statusCardView: FlightStatusCardView?
     
+    fileprivate var socketManager: WebSocketManager?
     fileprivate let locationManager = CLLocationManager()
     
     var mostRecentUserLocation: CLLocation? {
         didSet {
-            print("LOADED USER LOCATION")
-            sendLocation()
+            guard let userLocation = mostRecentUserLocation else {
+                return
+            }
+            
+            if let existingSocketManager = self.socketManager {
+                existingSocketManager.location = userLocation
+            } else {
+                setUpSocketManager(for: userLocation)
+            }
         }
     }
     
-    // MARK: - Flights
+    // MARK: - Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        sceneView.delegate = self
+        
+        let scene = SCNScene()
+        sceneView.scene = scene
+        sceneView.antialiasingMode = .multisampling2X
+        sceneView.delegate = self
+        
+        setupTap()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Create a session configuration
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.worldAlignment = .gravityAndHeading
+        sceneView.session.run(configuration)
+        setUpLocationManager()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        sceneView.session.pause()
+    }
+    
+    private func setUpSocketManager(for location: CLLocation) {
+        
+        //use a stub instead if it exists
+        if let stub = ViewController.NETWORK_STUB {
+            self.nearbyFlights = stub.flights
+            return
+        }
+        
+        let socketManager = WebSocketManager(for: location)
+        self.socketManager = socketManager
+        
+        socketManager.didReceiveFlights = { flights in
+            self.nearbyFlights = flights
+        }
+        
+        socketManager.onError = {
+            //this doesn't do anything yet. not sure what qualifies as an error in terms of web sockets.
+            //needs to warn the user about connectivity issues
+        }
+    }
+    
+    // MARK: Flights
     
     var nearbyFlights: [Flight] = [] {
         didSet {
@@ -47,7 +100,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 if let existingNode = planeNodes[flight.icao] {
                     let move = SCNAction.move(
                         to: flight.sceneKitCoordinate(relativeTo: userLocation),
-                        duration: serverPollingInterval)
+                        duration: WebSocketManager.serverPollingInterval)
                     
                     existingNode.runAction(move)
                 }
@@ -125,43 +178,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             self.statusCardView = statusCardView
             self.view.addSubview(statusCardView)
             
-            statusCardView.widthAnchor.constraint(equalToConstant: statusCardView.intrinsicContentSize.width).isActive = true
-            statusCardView.heightAnchor.constraint(equalToConstant: statusCardView.intrinsicContentSize.height).isActive = true
-            
             statusCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             statusCardView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-            
-            //add arrow to plane
-            let arrowPath = UIBezierPath()
-            let cardBounds = CGRect.init(origin: .zero, size: statusCardView.intrinsicContentSize)
-            
-            arrowPath.move(to: CGPoint(
-                x: cardBounds.midX,
-                y: cardBounds.minY))
-            
-            arrowPath.addLine(to: CGPoint(
-                x: cardBounds.midX,
-                y: cardBounds.minY - cardBounds.height * 0.05))
-            
-            arrowPath.addLine(to: CGPoint(
-                x: cardBounds.midX - cardBounds.width * 0.025,
-                y: cardBounds.minY - cardBounds.height * 0.15))
-            
-            let arrowLayer = CAShapeLayer()
-            arrowLayer.path = arrowPath.cgPath
-            arrowLayer.lineCap = kCALineCapRound
-            arrowLayer.lineJoin = kCALineJoinRound
-            arrowLayer.strokeColor = UIColor(white: 1.0, alpha: 1.0).cgColor
-            arrowLayer.fillColor = nil
-            arrowLayer.lineWidth = 4
-            
-            statusCardView.layer.addSublayer(arrowLayer)
-            statusCardView.layer.masksToBounds = false
-            statusCardView.clipsToBounds = false
         }
         
         statusCardView.alpha = 1.0
         statusCardView.setLoading(true, flight: flight)
+        updatePositionOfStatusCardView()
         
         guard !flight.callsign.isEmpty else {
             statusCardView.updateForPrivateFlight(flight)
@@ -186,82 +209,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
-    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
-        super.motionEnded(motion, with: event)
-        
-        if motion == .motionShake,
-            let statusCardView = self.statusCardView,
-            let flight = statusCardView.flight,
-            let flightInfo = statusCardView.flightInfo
-        {
-            guard let origin = flightInfo.originAirport ?? flightInfo.originAirportCode,
-                let destination = flightInfo.destinationAirport ?? flightInfo.destinationAirportCode else
-            {
-                return
-            }
-            
-            var messageString = "from \(origin) to \(destination)"
-            
-            if let aircraftType = flightInfo.aircraftType {
-                messageString += " on a \(aircraftType)."
-            } else {
-                messageString += "."
-            }
-            
-            let alert = UIAlertController(
-                title: flight.callsign,
-                message: messageString,
-                preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    // MARK: - Lifecycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        sceneView.delegate = self
-        
-        let scene = SCNScene()
-        sceneView.scene = scene
-        sceneView.antialiasingMode = .multisampling2X
-        sceneView.delegate = self
-        
-        // Connect to web socket
-        if !ViewController.USE_JSON_STUB {
-            socket.onText = self.websocketDidReceiveMessage(text:)
-            socket.onConnect = self.websocketDidConnect
-            socket.onDisconnect = self.websocketDidDisconnect
-            socket.onData = self.websocketDidReceiveData(data:)
-            socket.connect()
-        }
-        
-        setupTap()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Create a session configuration
-        let configuration = ARWorldTrackingSessionConfiguration()
-        configuration.worldAlignment = .gravityAndHeading
-        sceneView.session.run(configuration)
-        setUpLocationManager()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        sceneView.session.pause()
-    }
-}
-
-// MARK: - ARSCNViewDelegate
-
-extension ViewController /*: ARSCNViewDelegate */ {
-    
-    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+    func updatePositionOfStatusCardView() {
         guard let statusCardView = self.statusCardView,
             let flight = statusCardView.flight,
             let node = planeNodes[flight.icao] else
@@ -270,7 +218,7 @@ extension ViewController /*: ARSCNViewDelegate */ {
         }
         
         let centerPoint = node.position
-        let projectedPoint = renderer.projectPoint(centerPoint)
+        let projectedPoint = sceneView.projectPoint(centerPoint)
         
         let translate = CGAffineTransform(
             translationX: CGFloat(projectedPoint.x) - statusCardView.intrinsicContentSize.width/2.2,
@@ -282,12 +230,23 @@ extension ViewController /*: ARSCNViewDelegate */ {
             statusCardView.transform = translateAndScale
             
             //if z if less than 1, then the point is behind the camera
+            // this is a little buggy sometimes.
             if projectedPoint.z > 1 {
                 statusCardView.alpha = 0.0
             } else {
                 statusCardView.alpha = 1.0
             }
         }
+    }
+    
+}
+
+// MARK: - ARSCNViewDelegate
+
+extension ViewController: ARSCNViewDelegate {
+    
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        updatePositionOfStatusCardView()
     }
     
 }
@@ -308,91 +267,6 @@ extension ViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         mostRecentUserLocation = locations[0] as CLLocation
-        
-        if ViewController.USE_JSON_STUB,
-            let jsonStub = Bundle.main.url(forResource: "server_stub", withExtension: "json"),
-            let jsonText = try? String(contentsOf: jsonStub)
-        {
-            processJsonText(text: jsonText)
-        }
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
-    {
-        print("\(error)")
-    }
-}
-
-// MARK: - WebSocketDelegate
-
-extension ViewController {
-    
-    func websocketDidConnect() {
-        sendLocation()
-    }
-    
-    func sendLocation() {
-        guard let location = mostRecentUserLocation else {
-            return
-        }
-        
-        print("sent location")
-        socket.write(string: "\(location.coordinate.latitude),\(location.coordinate.longitude)")
-    }
-    
-    func websocketDidDisconnect(error: NSError?) {
-        print("disconnected")
-    }
-    
-    
-    func websocketDidReceiveMessage(text: String) {
-        print("RECEIVED DATA")
-        processJsonText(text: text)
-    }
-    
-    func processJsonText(text: String) {
-        guard let flightData = text.toJSON() as? [[String: Any]] else {
-            return
-        }
-        
-        nearbyFlights = flightData.map { flight in
-            let icao = flight["icao"] as? String ?? "--"
-            let call = flight["call"] as? String ?? "Unknown"
-            let lat = flight["lat"] as? Double ?? 0
-            let lng = flight["lng"] as? Double ?? 0
-            let alt = flight["alt"] as? Double ?? 0
-            let hdg = flight["hdg"] as? Double ?? 0
-            let _ = flight["gvel"]
-            let _ = flight["vvel"]
-            
-            let airplane = Flight(
-                icao: icao,
-                callsign: call,
-                longitude: lng,
-                latitude: lat,
-                altitude: alt,
-                heading: hdg)
-            
-            return airplane
-        }.filter { flight in
-            return (!flight.callsign.isEmpty) && !(flight.callsign == "CGIQC")
-        }
-    }
-    
-    func websocketDidReceiveData(data: Data) {
-        print("data")
-    }
-}
-
-extension String {
-    func toJSON() -> Any? {
-        guard let data = self.data(using: .utf8, allowLossyConversion: false) else { return nil }
-        return try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-    }
-}
-
-extension Dictionary where Value: Equatable {
-    func allKeys(forValue val: Value) -> [Key] {
-        return self.filter { (keyvalue) in keyvalue.value == val }.map { $0.0 }
-    }
 }

@@ -43,6 +43,35 @@ class FlightStatusCardView: UINibView {
         
         nibView.layer.cornerRadius = 10.0
         nibView.layer.masksToBounds = true
+        
+        
+        //add arrow to plane
+        let arrowPath = UIBezierPath()
+        let cardBounds = CGRect(origin: .zero, size: intrinsicContentSize)
+        
+        arrowPath.move(to: CGPoint(
+            x: cardBounds.midX,
+            y: cardBounds.minY))
+        
+        arrowPath.addLine(to: CGPoint(
+            x: cardBounds.midX,
+            y: cardBounds.minY - cardBounds.height * 0.05))
+        
+        arrowPath.addLine(to: CGPoint(
+            x: cardBounds.midX - cardBounds.width * 0.025,
+            y: cardBounds.minY - cardBounds.height * 0.15))
+        
+        let arrowLayer = CAShapeLayer()
+        arrowLayer.path = arrowPath.cgPath
+        arrowLayer.lineCap = kCALineCapRound
+        arrowLayer.lineJoin = kCALineJoinRound
+        arrowLayer.strokeColor = UIColor(white: 1.0, alpha: 1.0).cgColor
+        arrowLayer.fillColor = nil
+        arrowLayer.lineWidth = 4
+        
+        layer.addSublayer(arrowLayer)
+        layer.masksToBounds = false
+        clipsToBounds = false
     }
     
     override var intrinsicContentSize: CGSize {

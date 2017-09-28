@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		18AB32029FCDC13886937075 /* Pods_AR_Planes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A316EF298119193D66BD6418 /* Pods_AR_Planes.framework */; };
+		2E594EFD1F7D54620050E4EF /* WebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E594EFC1F7D54620050E4EF /* WebSocketManager.swift */; };
+		2E594F021F7D600F0050E4EF /* server_stub_atlanta.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E594F011F7D600F0050E4EF /* server_stub_atlanta.json */; };
+		2E594F041F7D63C20050E4EF /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E594F031F7D63C20050E4EF /* Stub.swift */; };
 		2E6740921F6D018400EEF5CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6740911F6D018400EEF5CE /* AppDelegate.swift */; };
 		2E6740961F6D018400EEF5CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6740951F6D018400EEF5CE /* ViewController.swift */; };
 		2E6740991F6D018400EEF5CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E6740971F6D018400EEF5CE /* Main.storyboard */; };
@@ -15,7 +18,7 @@
 		2E67409E1F6D018400EEF5CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E67409C1F6D018400EEF5CE /* LaunchScreen.storyboard */; };
 		2E6740A61F6D728200EEF5CE /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6740A51F6D728200EEF5CE /* Flight.swift */; };
 		2E6740B01F6DA20000EEF5CE /* 777.obj in Resources */ = {isa = PBXBuildFile; fileRef = 2E6740AF1F6DA1FF00EEF5CE /* 777.obj */; };
-		2E96BFDF1F6E3CA0001BCBAA /* server_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E96BFDE1F6E3CA0001BCBAA /* server_stub.json */; };
+		2E96BFDF1F6E3CA0001BCBAA /* server_stub_waterloo.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E96BFDE1F6E3CA0001BCBAA /* server_stub_waterloo.json */; };
 		2EE5C8C81F6E2AF800207142 /* StatusCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EE5C8C71F6E2AF800207142 /* StatusCard.xib */; };
 		2EF1DB741F6E0669004634E6 /* FlightStatusCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1DB731F6E0669004634E6 /* FlightStatusCardView.swift */; };
 /* End PBXBuildFile section */
@@ -23,6 +26,9 @@
 /* Begin PBXFileReference section */
 		0606FDA1BCAABFC888806841 /* Pods-AR Planes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR Planes.release.xcconfig"; path = "Pods/Target Support Files/Pods-AR Planes/Pods-AR Planes.release.xcconfig"; sourceTree = "<group>"; };
 		251096B6E696B249EB3C1D11 /* Pods-AR Planes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR Planes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AR Planes/Pods-AR Planes.debug.xcconfig"; sourceTree = "<group>"; };
+		2E594EFC1F7D54620050E4EF /* WebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketManager.swift; sourceTree = "<group>"; };
+		2E594F011F7D600F0050E4EF /* server_stub_atlanta.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = server_stub_atlanta.json; sourceTree = "<group>"; };
+		2E594F031F7D63C20050E4EF /* Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stub.swift; sourceTree = "<group>"; };
 		2E67408E1F6D018400EEF5CE /* AR Planes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AR Planes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E6740911F6D018400EEF5CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E6740951F6D018400EEF5CE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -32,7 +38,7 @@
 		2E67409F1F6D018400EEF5CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E6740A51F6D728200EEF5CE /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
 		2E6740AF1F6DA1FF00EEF5CE /* 777.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 777.obj; sourceTree = "<group>"; };
-		2E96BFDE1F6E3CA0001BCBAA /* server_stub.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = server_stub.json; sourceTree = "<group>"; };
+		2E96BFDE1F6E3CA0001BCBAA /* server_stub_waterloo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = server_stub_waterloo.json; sourceTree = "<group>"; };
 		2EE5C8C71F6E2AF800207142 /* StatusCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusCard.xib; sourceTree = "<group>"; };
 		2EF1DB731F6E0669004634E6 /* FlightStatusCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightStatusCardView.swift; sourceTree = "<group>"; };
 		A316EF298119193D66BD6418 /* Pods_AR_Planes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AR_Planes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +65,35 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		2E594EFE1F7D5A020050E4EF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2E594F001F7D5FCF0050E4EF /* Stubs */,
+				2E594EFC1F7D54620050E4EF /* WebSocketManager.swift */,
+				2E6740A51F6D728200EEF5CE /* Flight.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2E594EFF1F7D5A100050E4EF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2EF1DB731F6E0669004634E6 /* FlightStatusCardView.swift */,
+				2EE5C8C71F6E2AF800207142 /* StatusCard.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2E594F001F7D5FCF0050E4EF /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				2E594F031F7D63C20050E4EF /* Stub.swift */,
+				2E594F011F7D600F0050E4EF /* server_stub_atlanta.json */,
+				2E96BFDE1F6E3CA0001BCBAA /* server_stub_waterloo.json */,
+			);
+			path = Stubs;
+			sourceTree = "<group>";
+		};
 		2E6740851F6D018400EEF5CE = {
 			isa = PBXGroup;
 			children = (
@@ -82,15 +117,13 @@
 			children = (
 				2E6740911F6D018400EEF5CE /* AppDelegate.swift */,
 				2E6740951F6D018400EEF5CE /* ViewController.swift */,
-				2E6740A51F6D728200EEF5CE /* Flight.swift */,
-				2EF1DB731F6E0669004634E6 /* FlightStatusCardView.swift */,
-				2EE5C8C71F6E2AF800207142 /* StatusCard.xib */,
+				2E594EFF1F7D5A100050E4EF /* Views */,
+				2E594EFE1F7D5A020050E4EF /* Model */,
+				2E6740971F6D018400EEF5CE /* Main.storyboard */,
 				2E67409C1F6D018400EEF5CE /* LaunchScreen.storyboard */,
 				2E6740AF1F6DA1FF00EEF5CE /* 777.obj */,
-				2E6740971F6D018400EEF5CE /* Main.storyboard */,
 				2E67409A1F6D018400EEF5CE /* Assets.xcassets */,
 				2E67409F1F6D018400EEF5CE /* Info.plist */,
-				2E96BFDE1F6E3CA0001BCBAA /* server_stub.json */,
 			);
 			path = "AR Planes";
 			sourceTree = "<group>";
@@ -164,11 +197,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E96BFDF1F6E3CA0001BCBAA /* server_stub.json in Resources */,
+				2E96BFDF1F6E3CA0001BCBAA /* server_stub_waterloo.json in Resources */,
 				2E6740B01F6DA20000EEF5CE /* 777.obj in Resources */,
 				2E67409E1F6D018400EEF5CE /* LaunchScreen.storyboard in Resources */,
 				2EE5C8C81F6E2AF800207142 /* StatusCard.xib in Resources */,
 				2E67409B1F6D018400EEF5CE /* Assets.xcassets in Resources */,
+				2E594F021F7D600F0050E4EF /* server_stub_atlanta.json in Resources */,
 				2E6740991F6D018400EEF5CE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,6 +263,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EF1DB741F6E0669004634E6 /* FlightStatusCardView.swift in Sources */,
+				2E594F041F7D63C20050E4EF /* Stub.swift in Sources */,
+				2E594EFD1F7D54620050E4EF /* WebSocketManager.swift in Sources */,
 				2E6740A61F6D728200EEF5CE /* Flight.swift in Sources */,
 				2E6740961F6D018400EEF5CE /* ViewController.swift in Sources */,
 				2E6740921F6D018400EEF5CE /* AppDelegate.swift in Sources */,
