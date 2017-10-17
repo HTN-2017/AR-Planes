@@ -85,20 +85,20 @@ class WebSocketManager {
 
 extension WebSocketManager: WebSocketDelegate {
     
-    func websocketDidConnect(socket: WebSocket) {
+    func websocketDidConnect(socket: WebSocketClient) {
         sendLocationToServer()
     }
     
-    func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
+    func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
         onError?()
     }
     
-    func websocketDidReceiveMessage(socket: WebSocket, text: String) {
+    func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
         let flights = WebSocketManager.processJsonTextFromServer(text)
         didReceiveFlights?(flights)
     }
     
-    func websocketDidReceiveData(socket: WebSocket, data: Data) {
+    func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
         return
     }
     

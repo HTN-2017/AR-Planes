@@ -1,15 +1,25 @@
 PODS:
-  - Kanna (2.1.1)
-  - Starscream (2.1.1)
+  - Kanna (4.0.0)
+  - Starscream (3.0.2)
 
 DEPENDENCIES:
-  - Kanna (~> 2.1.0)
-  - Starscream
+  - Kanna (from `https://github.com/tid-kijyun/Kanna.git`, branch `feature/v4.0.0`)
+  - Starscream (~> 3.0)
+
+EXTERNAL SOURCES:
+  Kanna:
+    :branch: feature/v4.0.0
+    :git: https://github.com/tid-kijyun/Kanna.git
+
+CHECKOUT OPTIONS:
+  Kanna:
+    :commit: 9091f84ed0e39b7fa8536da98a1812c3456bc4e3
+    :git: https://github.com/tid-kijyun/Kanna.git
 
 SPEC CHECKSUMS:
-  Kanna: 9b4b086c218703f2b94f5b21a466217dd2f9332e
-  Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
+  Kanna: d5ae2a26472f7e7a474e7f36a9cd8aa2c8c63ad3
+  Starscream: b512c62f6706421221b5ceb2ba01a9f58aca5bea
 
-PODFILE CHECKSUM: 6ba43b381e6b9bf4aa5a6bd6688657916ad24a81
+PODFILE CHECKSUM: fcfc991809a8b099bfb87b8bf040462697ffa763
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.3.1

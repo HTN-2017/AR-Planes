@@ -197,29 +197,31 @@ struct Flight {
                 return
             }
             
-            guard let html = Kanna.HTML(html: data, encoding: .utf8) else {
-                return
-            }
-            
-            let scripts = html.css("script")
-            for script in scripts {
-                //the json we want is a variable `rosettaBootstrap` inside a script
-                guard let scriptText = script.innerHTML,
-                    scriptText.hasPrefix("var trackpollBootstrap = ") else
-                {
-                    continue
+            do {
+                let html = try Kanna.HTML(html: data, encoding: .utf8)
+                
+                let scripts = html.css("script")
+                for script in scripts {
+                    //the json we want is a variable `rosettaBootstrap` inside a script
+                    guard let scriptText = script.innerHTML,
+                        scriptText.hasPrefix("var trackpollBootstrap = ") else
+                    {
+                        continue
+                    }
+                    
+                    let jsonText = scriptText
+                        .replacingOccurrences(of: "var trackpollBootstrap = ", with: "")
+                        .replacingOccurrences(of: ";", with: "")
+                    
+                    guard let json = try? JSONSerialization.jsonObject(with: jsonText.data(using: .utf8)!, options: []) as? [String: Any] else {
+                        handler(nil)
+                        return
+                    }
+                    
+                    handler(json)
                 }
-                
-                let jsonText = scriptText
-                    .replacingOccurrences(of: "var trackpollBootstrap = ", with: "")
-                    .replacingOccurrences(of: ";", with: "")
-                
-                guard let json = try? JSONSerialization.jsonObject(with: jsonText.data(using: .utf8)!, options: []) as? [String: Any] else {
-                    handler(nil)
-                    return
-                }
-                
-                handler(json)
+            } catch {
+                // Handle error here
             }
         }
         
