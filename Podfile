@@ -7,7 +7,7 @@ target 'AR Planes' do
 
   # Pods for AR Planes
 
-pod ‘Starscream’ 
-pod 'Kanna', '~> 2.1.0'
+pod 'Starscream', '~> 3.0'
+pod 'Kanna', :git => 'https://github.com/tid-kijyun/Kanna.git', :branch => 'feature/v4.0.0'
 
 end
