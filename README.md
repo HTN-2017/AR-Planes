@@ -14,4 +14,4 @@ A further developed version of AR Planes is available on the App Store! It uses 
 
 **[Learn more](https://www.calstephens.tech/blog/announcing-ar-planes)**
 
-<img src="images/appstore.png">
+<img src="images/app store.png">
